@@ -7,21 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom py-3">
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/">My Profile</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/owners?action=showRestaurant">My Restaurant</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link bi bi-box-arrow-right me-2" href="/orders?action=showOrder">My Orders</a>
-      </li>
-    </ul>
-    <button class="btn btn-outline-danger ms-auto py-3">
-      <a class="bi bi-box-arrow-right me-2 py-3" href="/owners?action=logout"></a>Logout
-    </button>
+<header class="py-2 border-bottom">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="logo">
+      <img src="/resources/logo.jpg" alt="Company Logo" width="auto" height="50">
+    </div>
+    <div class="user-info d-flex align-items-center">
+      <span class="badge bg-primary"><i class="bi bi-person-circle me-2"></i>John Doe</span>
+    </div>
   </div>
-</nav>
+</header>
