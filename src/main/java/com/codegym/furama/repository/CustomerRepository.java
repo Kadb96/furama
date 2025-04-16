@@ -133,7 +133,7 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setString(6, customer.getCustomerPhone());
             preparedStatement.setString(7, customer.getCustomerEmail());
             preparedStatement.setString(8, customer.getCustomerAddress());
-            preparedStatement.setInt(9, customer.getCustomerTypeId());
+            preparedStatement.setInt(9, customerId);
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }

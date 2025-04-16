@@ -80,14 +80,12 @@
                                         <div class="col-md-6">
                                             <label for="customerEmail" class="form-label">Email Address</label>
                                             <input type="email" class="form-control" id="customerEmail"
-                                                   name="customerEmail" placeholder="example@domain.com" required
-                                                   maxlength="45">
+                                                   name="customerEmail" placeholder="example@domain.com" maxlength="45">
                                         </div>
                                         <div class="col-6">
                                             <label for="customerAddress" class="form-label">Address</label>
                                             <input type="text" class="form-control" id="customerAddress"
-                                                   name="customerAddress" placeholder="Enter full address" required
-                                                   maxlength="45">
+                                                   name="customerAddress" placeholder="Enter full address" maxlength="45">
                                         </div>
                                         <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
                                             <button type="reset" class="btn btn-secondary">Clear Form</button>

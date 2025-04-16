@@ -52,11 +52,18 @@
                                 <td>${customer.getCustomerAddress()}</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary me-1" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
+                                            data-bs-target="#editModal"
+                                            onclick="getEditingCustomerInfo(`${customer.getCustomerId()}`,
+                                                    `${customer.getCustomerTypeId()}`, `${customer.getCustomerName()}`,
+                                                    `${customer.getCustomerBirthdayString()}`,
+                                                    `${customer.getCustomerGenderString()}`,
+                                                    `${customer.getCustomerIdCard()}`, `${customer.getCustomerPhone()}`,
+                                                    `${customer.getCustomerEmail()}`, `${customer.getCustomerAddress()}`)">
                                         Edit
                                     </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal" onclick="getDeletingCustomerInfo(`${customer.getCustomerId()}`)">
+                                            data-bs-target="#deleteModal"
+                                            onclick="getDeletingCustomerInfo(`${customer.getCustomerId()}`)">
                                         Delete
                                     </button>
                                 </td>
@@ -72,6 +79,10 @@
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
+                        <c:if test="${pageNum > 2}">
+                            <li class="page-item"><a class="page-link"
+                                                     href="/customers?page=${pageNum - 2}">${pageNum - 2}</a></li>
+                        </c:if>
                         <c:if test="${pageNum > 1}">
                             <li class="page-item"><a class="page-link"
                                                      href="/customers?page=${pageNum - 1}">${pageNum - 1}</a></li>
@@ -81,6 +92,10 @@
                         <c:if test="${pageNum < lastPageNum}">
                             <li class="page-item"><a class="page-link"
                                                      href="/customers?page=${pageNum + 1}">${pageNum + 1}</a></li>
+                        </c:if>
+                        <c:if test="${pageNum < lastPageNum - 1}">
+                            <li class="page-item"><a class="page-link"
+                                                     href="/customers?page=${pageNum + 2}">${pageNum + 2}</a></li>
                         </c:if>
                         <li class="page-item">
                             <a class="page-link" href="/customers?page=${lastPageNum}" aria-label="Next">
@@ -94,6 +109,7 @@
     </div>
 </main>
 
+<%--edit modal--%>
 <div class="modal fade" id="editModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -102,56 +118,71 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="editForm" action="/customers" method="post">
+                    <input type="hidden" name="action" value="updateCustomer">
                     <div class="mb-3">
-                        <label class="form-label">Customer Type</label>
-                        <select class="form-select">
-                            <option value="Premium">Premium</option>
-                            <option value="Regular">Regular</option>
+                        <label class="form-label" for="editingCustomerId">Customer ID</label>
+                        <input type="text" class="form-control" id="editingCustomerId" name="customerId" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingCustomerTypeId">Customer Type</label>
+                        <select class="form-select" name="customerTypeId" id="editingCustomerTypeId">
+                            <c:forEach items="${customerTypeList}" var="customerType">
+                                <option value="${customerType.getCustomerTypeId()}"
+                                        id="option${customerType.getCustomerTypeId()}">
+                                        ${customerType.getCustomerTypeName()}
+                                </option>
+                            </c:forEach>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" value="Jane Smith">
+                        <label class="form-label" for="editingCustomerName">Name</label>
+                        <input type="text" class="form-control" id="editingCustomerName" name="customerName" required
+                               maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Birthday</label>
-                        <input type="date" class="form-control" value="1990-05-15">
+                        <label class="form-label" for="editingCustomerBirthday">Birthday</label>
+                        <input type="text" class="form-control" id="editingCustomerBirthday" name="customerBirthday"
+                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Gender</label>
-                        <select class="form-select">
-                            <option value="Female">Female</option>
-                            <option value="Male">Male</option>
-                            <option value="Other">Other</option>
+                        <label class="form-label" for="editingCustomerGender">Gender</label>
+                        <select class="form-select" id="editingCustomerGender" name="customerGender">
+                            <option value="true" id="editingCustomerGenderMale">Male</option>
+                            <option value="false" id="editingCustomerGenderFemale">Female</option>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">ID Card</label>
-                        <input type="text" class="form-control" value="ID123456">
+                        <label class="form-label" for="editingCustomerIdCard">ID Card</label>
+                        <input type="text" class="form-control" id="editingCustomerIdCard" name="customerIdCard"
+                               required pattern="[0-9]+" maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Phone</label>
-                        <input type="tel" class="form-control" value="555-0123">
+                        <label class="form-label" for="editingCustomerPhone">Phone</label>
+                        <input type="tel" class="form-control" id="editingCustomerPhone" name="customerPhone" required
+                               pattern="[+][0-9]{1,4}\s?[(]?[0-9]{1,4}[)]?[-\s]?[0-9]{1,10}" maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" value="jane@email.com">
+                        <label class="form-label" for="editingCustomerEmail">Email</label>
+                        <input type="email" class="form-control" id="editingCustomerEmail" name="customerEmail"
+                               maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Address</label>
-                        <textarea class="form-control">123 Main St</textarea>
+                        <label class="form-label" for="editingCustomerAddress">Address</label>
+                        <input type="text" class="form-control" id="editingCustomerAddress" name="customerAddress"
+                               maxlength="45">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
+                <button type="submit" class="btn btn-primary" form="editForm">Save Changes</button>
             </div>
         </div>
     </div>
 </div>
 
+<%--delete modal--%>
 <div class="modal fade" id="deleteModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -176,7 +207,26 @@
 <c:import url="/view/layout/footer.jsp"/>
 <script>
     function getDeletingCustomerInfo(deletingCustomerID) {
-        document.getElementById("deletingCustomerId").value = deletingCustomerID
+        document.getElementById("deletingCustomerId").value = deletingCustomerID;
+    }
+
+    function getEditingCustomerInfo(editingCustomerId, editingCustomerTypeId, editingCustomerName,
+                                    editingCustomerBirthday, editingCustomerGender, editingCustomerIdCard,
+                                    editingCustomerPhone, editingCustomerEmail, editingCustomerAddress) {
+        document.getElementById("editingCustomerId").value = editingCustomerId;
+        let selectOption = "option" + editingCustomerTypeId;
+        document.getElementById(selectOption).selected = true;
+        document.getElementById("editingCustomerName").value = editingCustomerName;
+        document.getElementById("editingCustomerBirthday").value = editingCustomerBirthday;
+        if (editingCustomerGender == "Male") {
+            document.getElementById("editingCustomerGenderMale").selected = true;
+        } else {
+            document.getElementById("editingCustomerGenderFemale").selected = true;
+        }
+        document.getElementById("editingCustomerIdCard").value = editingCustomerIdCard;
+        document.getElementById("editingCustomerPhone").value = editingCustomerPhone;
+        document.getElementById("editingCustomerEmail").value = editingCustomerEmail;
+        document.getElementById("editingCustomerAddress").value = editingCustomerAddress;
     }
 </script>
 </body>

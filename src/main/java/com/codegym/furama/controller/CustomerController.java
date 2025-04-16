@@ -2,8 +2,11 @@ package com.codegym.furama.controller;
 
 import com.codegym.furama.dto.CustomerDto;
 import com.codegym.furama.model.Customer;
+import com.codegym.furama.model.CustomerType;
 import com.codegym.furama.service.CustomerService;
+import com.codegym.furama.service.CustomerTypeService;
 import com.codegym.furama.service.ICustomerService;
+import com.codegym.furama.service.ICustomerTypeService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +22,9 @@ import java.util.List;
 public class CustomerController extends HttpServlet {
     //ket noi CustomerService
     ICustomerService customerService = new CustomerService();
+
+    //ket noi CustomerTypeService
+    ICustomerTypeService customerTypeService = new CustomerTypeService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -69,9 +75,12 @@ public class CustomerController extends HttpServlet {
         //lay customer list theo trang tu CustomerService
         List<CustomerDto> customerList = customerService.showByPage(pageNum);
 
+        //lay customer type list tu CustomerTypeService
+        List<CustomerType> customerTypeList = customerTypeService.showAll();
+
         //tinh trang cuoi
         int lastPageNum = pageNum;
-        if (customerFullList.size() == 0) {
+        if (customerFullList.isEmpty()) {
             lastPageNum = 1;
         } else if (customerFullList.size() % 5 == 0) {
             lastPageNum = customerFullList.size() / 5;
@@ -83,6 +92,7 @@ public class CustomerController extends HttpServlet {
         req.setAttribute("customerList", customerList);
         req.setAttribute("pageNum", pageNum);
         req.setAttribute("lastPageNum", lastPageNum);
+        req.setAttribute("customerTypeList", customerTypeList);
 
         //chuyen tiep toi jsp
         req.getRequestDispatcher("/view/customer/customer_home.jsp").forward(req, resp);
