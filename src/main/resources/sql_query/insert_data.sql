@@ -1,39 +1,39 @@
--- insert 
--- 	into vi_tri (ma_vi_tri, ten_vi_tri)
--- values 
--- 	(1, 'Quan ly'),
--- 	(2, 'Nhan vien');
---     
--- insert
--- 	into trinh_do (ma_trinh_do, ten_trinh_do)
--- values
--- 	(1, 'Trung cap'),
---     (2, 'Cao dang'),
---     (3, 'Dai hoc'),
---     (4, 'Sau dai hoc');
---     
--- insert
--- 	into bo_phan (ma_bo_phan, ten_bo_phan)
--- values
--- 	(1, 'Sale-Marketing'),
---     (2, 'Hanh chinh'),
---     (3, 'Phuc vu'),
---     (4, 'Quan ly');
---     
--- insert
--- 	into nhan_vien (ma_nhan_vien, ho_ten, ngay_sinh, so_cmnd, luong, so_dien_thoai, email, dia_chi, ma_vi_tri, ma_trinh_do, ma_bo_phan)
--- values
--- 	(1, 'Nguyen Van An', '1970-11-07', 456231786, 10000000, '0901234121', 'annguyen@gmail.com', '295 Nguyen Tat Thanh, Da Nang', 1, 3, 1),
---     (2, 'Le Van Binh', '1997-04-09', 654231234, 7000000, '0934212314', 'binhlv@gmail.com', '22 Yen Bai, Da Nang', 1, 2, 2),
---     (3, 'Ho Thi Yen', '1995-12-12', 999231723, 14000000, '0412352315', 'thiyen@gmail.com', 'K234/11 Dien Bien Phu, Gia Lai', 1, 3, 2),
---     (4, 'Vo Cong Toan', '1980-04-04', 123231365, 17000000, '0374443232', 'toan0404@gmail.com', '77 Hoang Dieu, Quang Tri', 1, 4, 4),
---     (5, 'Nguyen Binh Phat', '1999-12-09', 454363232, 6000000, '0902341231', 'phatphat@gmail.com', '43 Yen Bai, Da Nang', 2, 1, 1),
---     (6, 'Khuc Nguyen An Nghi', '2000-11-08', 964542311, 7000000, '0978653213', 'annghi20@gmail.com', '294 Nguyen Tat Thanh, Da Nang', 2, 2, 3),
---     (7, 'Nguyen Huu Ha', '1993-01-01', 534323231, 8000000, '0941234553', 'nhh0101@gmail.com', '4 Nguyen Chi Thanh, Hue', 2, 3, 2),
---     (8, 'Nguyen Ha Dong', '1989-09-03', 234414123, 9000000, '0642123111', 'donghanguyen@gmail.com', '111 Hung Vuong, Ha Noi', 2, 4, 4),
---     (9, 'Tong Hoang', '1982-09-03', 256781231, 6000000, '0245144444', 'hoangtong@gmail.com', '213 Ham Nghi, Da Nang', 2, 4, 4),
---     (10, 'Nguyen Cong Dao', '1994-01-08', 755434343, 8000000, '0988767111', 'nguyencongdao12@gmail.com', '6 Hoa Khanh, Dong Nai', 2, 3, 2);
---     
+insert 
+	into position (position_id, position_name)
+values 
+	(1, 'Quan ly'),
+	(2, 'Nhan vien');
+    
+insert
+	into education_degree (education_degree_id, education_degree_name)
+values
+	(1, 'Trung cap'),
+    (2, 'Cao dang'),
+    (3, 'Dai hoc'),
+    (4, 'Sau dai hoc');
+    
+insert
+	into division (division_id, division_name)
+values
+	(1, 'Sale-Marketing'),
+    (2, 'Hanh chinh'),
+    (3, 'Phuc vu'),
+    (4, 'Quan ly');
+    
+insert
+	into employee (education_degreeemployee_id, employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
+values
+	(1, 'Nguyen Van An', '1970-11-07', 456231786, 10000000, '0901234121', 'annguyen@gmail.com', '295 Nguyen Tat Thanh, Da Nang', 1, 3, 1),
+    (2, 'Le Van Binh', '1997-04-09', 654231234, 7000000, '0934212314', 'binhlv@gmail.com', '22 Yen Bai, Da Nang', 1, 2, 2),
+    (3, 'Ho Thi Yen', '1995-12-12', 999231723, 14000000, '0412352315', 'thiyen@gmail.com', 'K234/11 Dien Bien Phu, Gia Lai', 1, 3, 2),
+    (4, 'Vo Cong Toan', '1980-04-04', 123231365, 17000000, '0374443232', 'toan0404@gmail.com', '77 Hoang Dieu, Quang Tri', 1, 4, 4),
+    (5, 'Nguyen Binh Phat', '1999-12-09', 454363232, 6000000, '0902341231', 'phatphat@gmail.com', '43 Yen Bai, Da Nang', 2, 1, 1),
+    (6, 'Khuc Nguyen An Nghi', '2000-11-08', 964542311, 7000000, '0978653213', 'annghi20@gmail.com', '294 Nguyen Tat Thanh, Da Nang', 2, 2, 3),
+    (7, 'Nguyen Huu Ha', '1993-01-01', 534323231, 8000000, '0941234553', 'nhh0101@gmail.com', '4 Nguyen Chi Thanh, Hue', 2, 3, 2),
+    (8, 'Nguyen Ha Dong', '1989-09-03', 234414123, 9000000, '0642123111', 'donghanguyen@gmail.com', '111 Hung Vuong, Ha Noi', 2, 4, 4),
+    (9, 'Tong Hoang', '1982-09-03', 256781231, 6000000, '0245144444', 'hoangtong@gmail.com', '213 Ham Nghi, Da Nang', 2, 4, 4),
+    (10, 'Nguyen Cong Dao', '1994-01-08', 755434343, 8000000, '0988767111', 'nguyencongdao12@gmail.com', '6 Hoa Khanh, Dong Nai', 2, 3, 2);
+    
 insert
 	into customer_type (customer_type_id, customer_type_name)
 values

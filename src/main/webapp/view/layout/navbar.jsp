@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item"><a class="nav-link active" href="/home">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Employee</a></li>
+                <li class="nav-item"><a class="nav-link" href="/employees">Employee</a></li>
                 <li class="nav-item"><a class="nav-link" href="/customers">Customer</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Service</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Contract</a></li>

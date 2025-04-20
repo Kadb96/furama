@@ -43,7 +43,7 @@ public class CustomerAddFormController extends HttpServlet {
         //lay du lieu action
         String action = req.getParameter("action");
         if (action == null) {
-            action = "showCustomerByPage";
+            action = "";
         }
 
         //function cho moi action

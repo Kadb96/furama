@@ -18,7 +18,7 @@
 <c:import url="/view/layout/navbar.jsp"/>
 <main class="container py-4">
     <div class="row">
-        <c:import url="/view/layout/customer_navbar.jsp"/>
+        <c:import url="/view/layout/employee_navbar.jsp"/>
         <div class="bg-white p-2 shadow-sm rounded col-lg-9">
             <div class="container py-3">
                 <div class="row justify-content-center">
@@ -28,9 +28,9 @@
                                 <h3 class="mb-0">Add A New Customer</h3>
                             </div>
                             <div class="card-body">
-                                <form class="needs-validation" action="/customer_add_forms" method="post">
+                                <form class="needs-validation" action="/employee_add_forms" method="post">
                                     <div class="row g-3">
-                                        <input type="hidden" name="action" value="addNewCustomer">
+                                        <input type="hidden" name="action" value="addNewEmployee">
                                         <div class="col-md-6">
                                             <label for="customerName" class="form-label">Customer Name</label>
                                             <input type="text" name="customerName" class="form-control"
@@ -50,9 +50,9 @@
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="birthday" class="form-label">Birthday</label>
-                                            <input type="text" class="form-control" id="birthday"
-                                                   placeholder="Enter customer Birthday" name="customerBirthday"
+                                            <label for="customerBirthday" class="form-label">Birthday</label>
+                                            <input type="text" class="form-control" id="customerBirthday"
+                                                   placeholder="dd/mm/yyyy" name="customerBirthday"
                                                    required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
                                         </div>
                                         <div class="col-md-6">

@@ -2,44 +2,48 @@ create database furama;
 
 use furama;
 
--- CREATE TABLE vi_tri (
---     ma_vi_tri INT PRIMARY KEY,
---     ten_vi_tri VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE user (
+	username VARCHAR(255) PRIMARY KEY,
+    password VARCHAR(255)
+);
 
--- CREATE TABLE trinh_do (
---     ma_trinh_do INT PRIMARY KEY,
---     ten_trinh_do VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE position (
+    position_id INT PRIMARY KEY AUTO_INCREMENT,
+    position_name VARCHAR(45) NOT NULL
+);
 
--- CREATE TABLE bo_phan (
---     ma_bo_phan INT PRIMARY KEY,
---     ten_bo_phan VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE education_degree (
+    education_degree_id INT PRIMARY KEY AUTO_INCREMENT,
+    education_degree_name VARCHAR(45) NOT NULL
+);
 
--- CREATE TABLE nhan_vien (
---     ma_nhan_vien INT PRIMARY KEY,
---     ho_ten VARCHAR(45) NOT NULL,
---     ngay_sinh DATE NOT NULL,
---     so_cmnd VARCHAR(45) NOT NULL,
---     luong DOUBLE NOT NULL,
---     so_dien_thoai VARCHAR(45) NOT NULL,
---     email VARCHAR(45),
---     dia_chi VARCHAR(45),
---     ma_vi_tri INT NOT NULL,
---     ma_trinh_do INT NOT NULL,
---     ma_bo_phan INT NOT NULL,
---     is_delete BOOLEAN DEFAULT(0) NOT NULL,
---     FOREIGN KEY (ma_vi_tri)
---         REFERENCES vi_tri (ma_vi_tri),
---     FOREIGN KEY (ma_trinh_do)
---         REFERENCES trinh_do (ma_trinh_do),
---     FOREIGN KEY (ma_bo_phan)
---         REFERENCES bo_phan (ma_bo_phan)
--- );
+CREATE TABLE division (
+    division_id INT PRIMARY KEY AUTO_INCREMENT,
+    division_name VARCHAR(45) NOT NULL
+);
+
+CREATE TABLE employee (
+	employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_name VARCHAR(45) NOT NULL,
+    employee_birthday DATE NOT NULL,
+    employee_id_card VARCHAR(45) NOT NULL,
+    employee_salary DOUBLE NOT NULL,
+    employee_phone VARCHAR(45) NOT NULL,
+    employee_email VARCHAR(45),
+    employee_address VARCHAR(45),
+    position_id INT NOT NULL,
+    education_degree_id INT NOT NULL,
+    division_id INT NOT NULL,
+    username VARCHAR(255),
+	FOREIGN KEY (position_id)
+		REFERENCES position (position_id),
+    FOREIGN KEY (education_degree_id)
+        REFERENCES education_degree (education_degree_id),
+    FOREIGN KEY (division_id)
+        REFERENCES division (division_id),
+	FOREIGN KEY (username)
+		REFERENCES user (username)
+);
 
 CREATE TABLE customer_type (
     customer_type_id INT PRIMARY KEY AUTO_INCREMENT,
