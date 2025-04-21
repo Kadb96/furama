@@ -62,24 +62,17 @@ public class CustomerController extends HttpServlet {
     }
 
     private void showCustomerByPage(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //lay page hien tai tu req
-        String page = req.getParameter("page");
-        int pageNum = 1;
-        if (page != null) {
-            pageNum = Integer.parseInt(page);
+        //lay thong tin keyword de tim kiem
+        String keyword = req.getParameter("keyword");
+        if (keyword == null) {
+            keyword = "";
         }
 
         //lay customer list tu CustomerService
-        List<CustomerDto> customerFullList = customerService.showAll();
-
-        //lay customer list theo trang tu CustomerService
-        List<CustomerDto> customerList = customerService.showByPage(pageNum);
-
-        //lay customer type list tu CustomerTypeService
-        List<CustomerType> customerTypeList = customerTypeService.showAll();
+        List<CustomerDto> customerFullList = customerService.searchAll(keyword);
 
         //tinh trang cuoi
-        int lastPageNum = pageNum;
+        int lastPageNum;
         if (customerFullList.isEmpty()) {
             lastPageNum = 1;
         } else if (customerFullList.size() % 5 == 0) {
@@ -88,11 +81,30 @@ public class CustomerController extends HttpServlet {
             lastPageNum = (customerFullList.size() - customerFullList.size() % 5) / 5 + 1;
         }
 
+        //lay page hien tai tu req
+        String page = req.getParameter("page");
+        int pageNum = 1;
+        if (page != null) {
+            pageNum = Integer.parseInt(page);
+        }
+
+        //gioi han lai trang
+        if (pageNum > lastPageNum) {
+            pageNum = lastPageNum;
+        }
+
+        //lay customer list theo trang tu CustomerService
+        List<CustomerDto> customerList = customerService.searchByPage(pageNum, keyword);
+
+        //lay customer type list tu CustomerTypeService
+        List<CustomerType> customerTypeList = customerTypeService.showAll();
+
         //tao attribute cho jsp
         req.setAttribute("customerList", customerList);
         req.setAttribute("pageNum", pageNum);
         req.setAttribute("lastPageNum", lastPageNum);
         req.setAttribute("customerTypeList", customerTypeList);
+        req.setAttribute("keyword", keyword);
 
         //chuyen tiep toi jsp
         req.getRequestDispatcher("/view/customer/customer_home.jsp").forward(req, resp);

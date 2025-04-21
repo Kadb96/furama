@@ -17,8 +17,18 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<CustomerDto> showByPage(int Page) {
-        return customerRepository.showByPage(Page);
+    public List<CustomerDto> showByPage(int page) {
+        return customerRepository.showByPage(page);
+    }
+
+    @Override
+    public List<CustomerDto> searchAll(String keyword) {
+        return customerRepository.searchAll(keyword);
+    }
+
+    @Override
+    public List<CustomerDto> searchByPage(int page, String keyword) {
+        return customerRepository.searchByPage(page, keyword);
     }
 
     @Override

@@ -22,6 +22,18 @@
         <div class="col-lg-9">
             <div class="bg-white p-2 shadow-sm rounded">
                 <h2>Customer List</h2>
+                <form action="/customers" method="get">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <input type="hidden" name="action" value="showCustomerByPage">
+                                <input type="text" class="form-control" id="tableSearch" name="keyword"
+                                       value="${keyword}">
+                                <button class="btn btn-sm btn-secondary me-1" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead>
@@ -75,30 +87,41 @@
                 <nav aria-label="Page navigation" class="mt-4">
                     <ul class="pagination justify-content-end">
                         <li class="page-item">
-                            <a class="page-link" href="/customers?page=1" aria-label="Next">
+                            <a class="page-link" href="/customers?page=1&keyword=${keyword}" aria-label="Next">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
                         <c:if test="${pageNum > 2}">
-                            <li class="page-item"><a class="page-link"
-                                                     href="/customers?page=${pageNum - 2}">${pageNum - 2}</a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/customers?page=${pageNum - 2}&keyword=${keyword}">${pageNum - 2}</a>
+                            </li>
                         </c:if>
                         <c:if test="${pageNum > 1}">
-                            <li class="page-item"><a class="page-link"
-                                                     href="/customers?page=${pageNum - 1}">${pageNum - 1}</a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/customers?page=${pageNum - 1}&keyword=${keyword}">${pageNum - 1}</a>
+                            </li>
                         </c:if>
-                        <li class="page-item active"><a class="page-link"
-                                                        href="/customers?page=${pageNum}">${pageNum}</a></li>
+                        <li class="page-item active">
+                            <a class="page-link"
+                               href="/customers?page=${pageNum}&keyword=${keyword}">${pageNum}</a>
+                        </li>
                         <c:if test="${pageNum < lastPageNum}">
-                            <li class="page-item"><a class="page-link"
-                                                     href="/customers?page=${pageNum + 1}">${pageNum + 1}</a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/customers?page=${pageNum + 1}">${pageNum + 1}</a>
+                            </li>
                         </c:if>
                         <c:if test="${pageNum < lastPageNum - 1}">
-                            <li class="page-item"><a class="page-link"
-                                                     href="/customers?page=${pageNum + 2}">${pageNum + 2}</a></li>
+                            <li class="page-item">
+                                <a class="page-link"
+                                   href="/customers?page=${pageNum + 2}">${pageNum + 2}</a>
+                            </li>
                         </c:if>
                         <li class="page-item">
-                            <a class="page-link" href="/customers?page=${lastPageNum}" aria-label="Next">
+                            <a class="page-link" href="/customers?page=${lastPageNum}&keyword=${keyword}"
+                               aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>

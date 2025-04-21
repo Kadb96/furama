@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface ICustomerService {
     List<CustomerDto> showAll();
-    List<CustomerDto> showByPage(int Page);
+    List<CustomerDto> showByPage(int page);
+    List<CustomerDto> searchAll(String keyword);
+    List<CustomerDto> searchByPage(int page, String keyword);
     boolean add(Customer customer);
     boolean delete(int customerId);
     boolean update(int customerId, Customer customer);

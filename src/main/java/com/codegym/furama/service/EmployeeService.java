@@ -22,6 +22,16 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
+    public List<EmployeeDto> searchAll(String keyword) {
+        return employeeRepository.searchAll(keyword);
+    }
+
+    @Override
+    public List<EmployeeDto> searchByPage(int page, String keyword) {
+        return employeeRepository.searchByPage(page, keyword);
+    }
+
+    @Override
     public boolean add(Employee employee) {
         if (employee.getUsername() == "") {
             return employeeRepository.addWithNullUserName(employee);
@@ -32,11 +42,14 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public boolean delete(int employeeId) {
-        return false;
+        return employeeRepository.delete(employeeId);
     }
 
     @Override
     public boolean update(int employeeId, Employee employee) {
-        return false;
-    }
+        if (employee.getUsername() == "") {
+            return employeeRepository.updateWithNullUserName(employeeId, employee);
+        } else {
+            return employeeRepository.update(employeeId, employee);
+        }    }
 }
