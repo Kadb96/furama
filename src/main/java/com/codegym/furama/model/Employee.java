@@ -177,6 +177,6 @@ public class Employee {
 
     public String getEmployeeSalaryString() {
         NumberFormat formatter = new DecimalFormat("###,###.###");
-        return formatter.format(employeeSalary);
+        return formatter.format(employeeSalary) + "đ";
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DivisionService implements IDivisionService {
     //ket noi DivisionRepository
-    IDivisionRepository divisionRepository = new DivisionRepository();
+    private IDivisionRepository divisionRepository = new DivisionRepository();
 
     @Override
     public List<Division> showAll() {

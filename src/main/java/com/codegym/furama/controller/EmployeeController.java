@@ -98,7 +98,7 @@ public class EmployeeController extends HttpServlet {
             pageNum = lastPageNum;
         }
 
-        //lay employee list theo trang tu CustomerService
+        //lay employee list theo trang tu EmployeeService
         List<EmployeeDto> employeeList = employeeService.searchByPage(pageNum, keyword);
 
         //lay postionList

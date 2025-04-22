@@ -28,8 +28,7 @@ public class CustomerAddFormController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //lay danh sach Customer Type
-        List<CustomerType> customerTypeList = new ArrayList<>();
-        customerTypeList = customerTypeService.showAll();
+        List<CustomerType> customerTypeList = customerTypeService.showAll();
 
         //tao attribute cho jsp
         req.setAttribute("customerTypeList", customerTypeList);
@@ -74,6 +73,5 @@ public class CustomerAddFormController extends HttpServlet {
 
         // chuyen tiep sang customer home
         resp.sendRedirect(req.getContextPath() + "/customers");
-
     }
 }

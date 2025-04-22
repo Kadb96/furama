@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EducationDegreeService implements IEducationDegreeService {
     //ket noi EducationDegreeRepository
-    IEducationDegreeRepository educationDegreeRepository = new EducationDegreeRepository();
+    private IEducationDegreeRepository educationDegreeRepository = new EducationDegreeRepository();
 
     @Override
     public List<EducationDegree> showAll() {

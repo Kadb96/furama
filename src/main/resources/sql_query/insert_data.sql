@@ -21,7 +21,7 @@ values
     (4, 'Quan ly');
     
 insert
-	into employee (education_degreeemployee_id, employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
+	into employee (employee_id, employee_name, employee_birthday, employee_id_card, employee_salary, employee_phone, employee_email, employee_address, position_id, education_degree_id, division_id)
 values
 	(1, 'Nguyen Van An', '1970-11-07', 456231786, 10000000, '0901234121', 'annguyen@gmail.com', '295 Nguyen Tat Thanh, Da Nang', 1, 3, 1),
     (2, 'Le Van Binh', '1997-04-09', 654231234, 7000000, '0934212314', 'binhlv@gmail.com', '22 Yen Bai, Da Nang', 1, 2, 2),
@@ -44,7 +44,8 @@ values
     (5, 'Member');
 
 insert
-	into customer (customer_id, customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address)
+	into customer (customer_id, customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, 
+		customer_address)
 values
 	(1, 5, 'Nguyen Thi Hao', '1970-11-07', 0, '643431213', '0945423362', 'thihao07@gmail.com', '23 Nguyen Hoang, Da Nang'),
     (2, 3, 'Pham Xuan Dieu', '1992-08-08', 1, '865342123', '0954333333', 'xuandieu92@gmail.com', 'K77/22 Thai Phien, Quang Tri'),
@@ -57,32 +58,32 @@ values
     (9, 1, 'Tran Dai Danh', '1994-07-01', 1, '432341235', '0643343433', 'danhhai99@gmail.com', '24 Ly Thuong Kiet, Quang Ngai'),
     (10, 2, 'Nguyen Tam Đac', '1989-07-01', 1, '344343432', '0987654321', 'dactam@gmail.com', '22 Ngo Quyen, Da Nang');
     
--- insert
--- 	into kieu_thue (ma_kieu_thue, ten_kieu_thue)
--- values
--- 	(1, 'year'),
---     (2, 'month'),
---     (3, 'day'),
---     (4, 'hour');
---     
--- insert
--- 	into loai_dich_vu (ma_loai_dich_vu, ten_loai_dich_vu)
--- values
--- 	(1, 'Villa'),
---     (2, 'House'),
---     (3, 'Room');
---     
--- insert
--- 	into dich_vu (ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, so_nguoi_toi_da, ma_kieu_thue, ma_loai_dich_vu, tieu_chuan_phong,
--- 		mo_ta_tien_nghi_khac, dien_tich_ho_boi, so_tang)
--- values
--- 	(1, 'Villa Beach Front', 25000, 10000000, 10, 3, 1, 'vip', 'Co ho boi', 500, 4),
---     (2, 'House Princess 01', 14000, 5000000, 7, 2, 2, 'vip', 'Co them bep nuong', null, 3),
---     (3, 'Room Twin 01', 5000, 1000000, 2, 4, 3, 'normal', 'Co tivi', null, null),
---     (4, 'Villa No Beach Front', 22000, 9000000, 8, 3, 1, 'normal', 'Co ho boi', 300, 3),
---     (5, 'House Princess 02', 10000, 4000000, 5, 3, 2, 'normal', 'Co them bep nuong', null, 2),
---     (6,'Room Twin 02', 3000, 900000, 2, 4, 3, 'normal', 'Co tivi', null, null);
---     
+insert
+	into rent_type (rent_type_id, rent_type_name)
+values
+	(1, 'year'),
+    (2, 'month'),
+    (3, 'day'),
+    (4, 'hour');
+    
+insert
+	into service_type (service_type_id, service_type_name)
+values
+	(1, 'Villa'),
+    (2, 'House'),
+    (3, 'Room');
+
+insert
+	into service (service_id, service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room,
+		description_other_convenience, pool_area, number_of_floors)
+values
+	(1, 'Villa Beach Front', 25000, 10000000, 10, 3, 1, 'vip', 'Co ho boi', 500, 4),
+    (2, 'House Princess 01', 14000, 5000000, 7, 2, 2, 'vip', 'Co them bep nuong', null, 3),
+    (3, 'Room Twin 01', 5000, 1000000, 2, 4, 3, 'normal', 'Co tivi', null, null),
+    (4, 'Villa No Beach Front', 22000, 9000000, 8, 3, 1, 'normal', 'Co ho boi', 300, 3),
+    (5, 'House Princess 02', 10000, 4000000, 5, 3, 2, 'normal', 'Co them bep nuong', null, 2),
+    (6,'Room Twin 02', 3000, 900000, 2, 4, 3, 'normal', 'Co tivi', null, null);
+    
 -- insert
 -- 	into dich_vu_di_kem (ma_dich_vu_di_kem, ten_dich_vu_di_kem, gia, don_vi, trang_thai)
 -- values

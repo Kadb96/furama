@@ -1,6 +1,6 @@
 package com.codegym.furama.repository;
 
-import com.codegym.furama.model.CustomerType;
+import com.codegym.furama.model.ServiceType;
 import com.codegym.furama.util.BaseRepository;
 
 import java.sql.Connection;
@@ -10,26 +10,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerTypeRepository implements ICustomerTypeRepository {
+public class ServiceTypeRepository implements IServiceTypeRepository {
     //cac cau query duoc su dung
-    private final String SHOW_ALL = "SELECT * FROM customer_type";
+    private final String SHOW_ALL = "SELECT * FROM service_type";
 
     @Override
-    public List<CustomerType> showAll() {
-        List<CustomerType> customerTypeList = new ArrayList<>();
+    public List<ServiceType> showAll() {
+        List<ServiceType> serviceTypeList = new ArrayList<>();
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int customerTypeId = resultSet.getInt("customer_type_id");
-                String customerTypeName = resultSet.getString("customer_type_name");
-                CustomerType customerType = new CustomerType(customerTypeId, customerTypeName);
-                customerTypeList.add(customerType);
+                int serviceTypeId = resultSet.getInt("service_type_id");
+                String serviceTypeName = resultSet.getString("service_type_name");
+                ServiceType serviceType = new ServiceType(serviceTypeId, serviceTypeName);
+                serviceTypeList.add(serviceType);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return customerTypeList;
+        return serviceTypeList;
     }
 }

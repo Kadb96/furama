@@ -63,36 +63,33 @@ CREATE TABLE customer (
     FOREIGN KEY (customer_type_id) REFERENCES customer_type(customer_type_id)
 );
 
--- CREATE TABLE loai_dich_vu (
---     ma_loai_dich_vu INT PRIMARY KEY,
---     ten_loai_dich_vu VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE service_type (
+    service_type_id INT PRIMARY KEY AUTO_INCREMENT,
+    service_type_name VARCHAR(45)
+);
 
--- CREATE TABLE kieu_thue (
---     ma_kieu_thue INT PRIMARY KEY,
---     ten_kieu_thue VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE rent_type (
+    rent_type_id INT PRIMARY KEY AUTO_INCREMENT,
+    rent_type_name VARCHAR(45)
+);
 
--- CREATE TABLE dich_vu (
---     ma_dich_vu INT PRIMARY KEY,
---     ten_dich_vu VARCHAR(45) NOT NULL,
---     dien_tich INT,
---     chi_phi_thue DOUBLE NOT NULL,
---     so_nguoi_toi_da INT,
---     ma_kieu_thue INT NOT NULL,
---     ma_loai_dich_vu INT NOT NULL,
---     tieu_chuan_phong VARCHAR(45),
---     mo_ta_tien_nghi_khac VARCHAR(45),
---     dien_tich_ho_boi DOUBLE,
---     so_tang INT,
---     is_delete BOOLEAN DEFAULT(0) NOT NULL,
---     FOREIGN KEY (ma_kieu_thue)
---         REFERENCES kieu_thue (ma_kieu_thue),
---     FOREIGN KEY (ma_loai_dich_vu)
---         REFERENCES loai_dich_vu (ma_loai_dich_vu)
--- );
+CREATE TABLE service (
+    service_id INT PRIMARY KEY AUTO_INCREMENT,
+    service_name VARCHAR(45) NOT NULL,
+    service_area INT,
+    service_cost DOUBLE NOT NULL,
+    service_max_people INT,
+    rent_type_id INT NOT NULL,
+    service_type_id INT NOT NULL,
+    standard_room VARCHAR(45),
+    description_other_convenience VARCHAR(45),
+    pool_area DOUBLE,
+    number_of_floors INT,
+    FOREIGN KEY (rent_type_id)
+        REFERENCES rent_type (rent_type_id),
+    FOREIGN KEY (service_type_id)
+        REFERENCES service_type (service_type_id)
+);
 
 -- CREATE TABLE dich_vu_di_kem (
 --     ma_dich_vu_di_kem INT PRIMARY KEY,

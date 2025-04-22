@@ -19,7 +19,7 @@ public class CustomerRepository implements ICustomerRepository {
     private final String SHOW_BY_PAGE = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id ORDER BY c.customer_id LIMIT ?, 5;";
     private final String SEARCH_ALL = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id WHERE c.customer_name LIKE ? ORDER BY c.customer_id;";
     private final String SEARCH_BY_PAGE = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id WHERE c.customer_name LIKE ? ORDER BY c.customer_id LIMIT ?, 5;";
-    private final String INSERT_INTO = "INSERT INTO customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String ADD = "INSERT INTO customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) values (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM customer WHERE customer_id = ?";
     private final String UPDATE = "UPDATE customer SET customer_type_id = ?, customer_name = ?, customer_birthday = ?, customer_gender = ?, customer_id_card = ?, customer_phone = ?, customer_email = ?, customer_address = ? WHERE customer_id = ?";
 
@@ -150,7 +150,7 @@ public class CustomerRepository implements ICustomerRepository {
     public boolean add(Customer customer) {
         Connection connection = BaseRepository.getConnectDB();
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO);
+            PreparedStatement preparedStatement = connection.prepareStatement(ADD);
             preparedStatement.setInt(1, customer.getCustomerTypeId());
             preparedStatement.setString(2, customer.getCustomerName());
             preparedStatement.setString(3, customer.getCustomerBirthdayStringSql());
