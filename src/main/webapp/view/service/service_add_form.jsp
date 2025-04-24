@@ -101,7 +101,7 @@
                                         </div>
                                         <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
                                             <button type="reset" class="btn btn-secondary">Clear Form</button>
-                                            <button type="submit" class="btn btn-primary">Register Employee</button>
+                                            <button type="submit" class="btn btn-primary">Add A Service</button>
                                         </div>
                                     </div>
                                 </form>

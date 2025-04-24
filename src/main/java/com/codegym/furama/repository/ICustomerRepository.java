@@ -1,7 +1,6 @@
 package com.codegym.furama.repository;
 
 import com.codegym.furama.dto.CustomerDto;
-import com.codegym.furama.dto.EmployeeDto;
 import com.codegym.furama.model.Customer;
 
 import java.util.List;

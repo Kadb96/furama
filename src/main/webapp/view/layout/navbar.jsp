@@ -18,7 +18,7 @@
                 <li class="nav-item"><a class="nav-link" href="/employees">Employee</a></li>
                 <li class="nav-item"><a class="nav-link" href="/customers">Customer</a></li>
                 <li class="nav-item"><a class="nav-link" href="/services">Service</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Contract</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contracts">Contract</a></li>
             </ul>
             <form class="d-flex">
                 <div class="input-group">

@@ -16,6 +16,7 @@ import java.util.List;
 
 public class SerivceRepository implements IServiceRepository {
     //cac cau query duoc su dung
+    private final String SHOW_ALL = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id ORDER BY s.service_id;";
     private final String SEARCH_ALL = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id WHERE s.service_name LIKE ? ORDER BY s.service_id;";
     private final String SEARCH_BY_PAGE = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id WHERE s.service_name LIKE ? ORDER BY s.service_id LIMIT ?, 5;";
     private final String ADD = "INSERT INTO service(service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room, description_other_convenience, pool_area, number_of_floors) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
@@ -23,6 +24,33 @@ public class SerivceRepository implements IServiceRepository {
     @Override
     public List<ServiceDto> showAll() {
         List<ServiceDto> serviceList = new ArrayList<>();
+        Connection connection = BaseRepository.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int serviceId = resultSet.getInt("service_id");
+                String serviceName = resultSet.getString("service_name");
+                int serviceArea = resultSet.getInt("service_area");
+                double serviceCost = resultSet.getDouble("service_cost");
+                int serviceMaxPeople = resultSet.getInt("service_max_people");
+                int rentTypeId = resultSet.getInt("rent_type_id");
+                int serviceTypeId = resultSet.getInt("service_type_id");
+                String standardRoom = resultSet.getString("standard_room");
+                String descriptionOtherConvenience = resultSet.getString("description_other_convenience");
+                double poolArea = resultSet.getDouble("pool_area");
+                int numberOfFloors = resultSet.getInt("number_of_floors");
+                String rentTypeName = resultSet.getString("rent_type_name");
+                String serviceTypeName = resultSet.getString("service_type_name");
+
+                ServiceDto service = new ServiceDto(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople,
+                        rentTypeId, serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors,
+                        rentTypeName, serviceTypeName);
+                serviceList.add(service);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return serviceList;
     }
 

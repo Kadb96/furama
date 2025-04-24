@@ -120,4 +120,3 @@
 <c:import url="/view/layout/footer.jsp"/>
 </body>
 </html>
-
