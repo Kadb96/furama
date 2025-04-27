@@ -1,10 +1,9 @@
 package com.codegym.furama.controller;
 
-import com.codegym.furama.model.Customer;
 import com.codegym.furama.model.RentType;
 import com.codegym.furama.model.Service;
 import com.codegym.furama.model.ServiceType;
-import com.codegym.furama.service.*;
+import com.codegym.furama.service.service_service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @WebServlet (name = "ServiceAddFormController", value = "/service_add_forms")

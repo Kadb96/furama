@@ -84,16 +84,16 @@ values
     (5, 'House Princess 02', 10000, 4000000, 5, 3, 2, 'normal', 'Co them bep nuong', null, 2),
     (6,'Room Twin 02', 3000, 900000, 2, 4, 3, 'normal', 'Co tivi', null, null);
     
--- insert
--- 	into dich_vu_di_kem (ma_dich_vu_di_kem, ten_dich_vu_di_kem, gia, don_vi, trang_thai)
--- values
--- 	(1, 'Karaoke', 10000, 'gio', 'tien nghi, hien tai'),
---     (2, 'Thue xe may', 10000, 'chiec', 'hong 1 xe'),
---     (3, 'Thue xe đap', 20000, 'chiec', 'tot'),
---     (4, 'Buffet buoi sang', 15000, 'suat', 'day du do an, trang mieng'),
---     (5, 'Buffet buoi trua', 90000, 'suat', 'day du do an, trang mieng'),
---     (6, 'Buffet buoi toi', 16000, 'suat', 'day du do an, trang mieng');
---     
+insert
+	into attach_service (attach_service_id, attach_service_name, attach_service_price, attach_service_unit, attach_service_status)
+values
+	(1, 'Karaoke', 10000, 'gio', 'tien nghi, hien tai'),
+    (2, 'Thue xe may', 10000, 'chiec', 'hong 1 xe'),
+    (3, 'Thue xe đap', 20000, 'chiec', 'tot'),
+    (4, 'Buffet buoi sang', 15000, 'suat', 'day du do an, trang mieng'),
+    (5, 'Buffet buoi trua', 90000, 'suat', 'day du do an, trang mieng'),
+    (6, 'Buffet buoi toi', 16000, 'suat', 'day du do an, trang mieng');
+    
 insert
 	into contract (contract_id, contract_start_date, contract_end_date, contract_deposit, contract_total_money, employee_id, customer_id, service_id)
 values
@@ -110,14 +110,14 @@ values
     (11, '2021-04-25', '2021-04-25', 0, 100000, 2, 2, 1),
     (12, '2021-05-25', '2021-05-27', 0, 100000, 7, 10, 1);
      
--- insert
--- 	into hop_dong_chi_tiet (ma_hop_dong_chi_tiet, ma_hop_dong, ma_dich_vu_di_kem, so_luong)
--- values
--- 	(1, 2, 4, 5),
---     (2, 2, 5, 8),
---     (3, 2, 6, 15),
---     (4, 3, 1, 1),
---     (5, 3, 2, 11),
---     (6, 1, 3, 1),
---     (7, 1, 2, 2),
---     (8, 12, 2, 2);
+insert
+	into contract_detail (contract_detail_id, contract_id, attach_service_id, quantity)
+values
+	(1, 2, 4, 5),
+    (2, 2, 5, 8),
+    (3, 2, 6, 15),
+    (4, 3, 1, 1),
+    (5, 3, 2, 11),
+    (6, 1, 3, 1),
+    (7, 1, 2, 2),
+    (8, 12, 2, 2);

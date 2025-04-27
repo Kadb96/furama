@@ -2,7 +2,7 @@ package com.codegym.furama.controller;
 
 import com.codegym.furama.dto.ServiceDto;
 import com.codegym.furama.model.*;
-import com.codegym.furama.service.*;
+import com.codegym.furama.service.service_service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

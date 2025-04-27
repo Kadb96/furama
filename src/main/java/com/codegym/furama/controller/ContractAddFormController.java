@@ -4,8 +4,14 @@ import com.codegym.furama.dto.CustomerDto;
 import com.codegym.furama.dto.EmployeeDto;
 import com.codegym.furama.dto.ServiceDto;
 import com.codegym.furama.model.Contract;
-import com.codegym.furama.model.Service;
-import com.codegym.furama.service.*;
+import com.codegym.furama.service.contract_service.ContractService;
+import com.codegym.furama.service.contract_service.IContractService;
+import com.codegym.furama.service.customer_repository.CustomerService;
+import com.codegym.furama.service.customer_repository.ICustomerService;
+import com.codegym.furama.service.employee_service.EmployeeService;
+import com.codegym.furama.service.employee_service.IEmployeeService;
+import com.codegym.furama.service.service_service.IServiceService;
+import com.codegym.furama.service.service_service.ServiceService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

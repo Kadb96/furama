@@ -2,10 +2,10 @@ package com.codegym.furama.controller;
 
 import com.codegym.furama.model.Customer;
 import com.codegym.furama.model.CustomerType;
-import com.codegym.furama.service.CustomerService;
-import com.codegym.furama.service.CustomerTypeService;
-import com.codegym.furama.service.ICustomerService;
-import com.codegym.furama.service.ICustomerTypeService;
+import com.codegym.furama.service.customer_repository.CustomerService;
+import com.codegym.furama.service.customer_repository.CustomerTypeService;
+import com.codegym.furama.service.customer_repository.ICustomerService;
+import com.codegym.furama.service.customer_repository.ICustomerTypeService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet (name = "CustomerAddForm", value = "/customer_add_forms")

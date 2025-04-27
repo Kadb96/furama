@@ -34,6 +34,7 @@
                             <th>Employee</th>
                             <th>Customer</th>
                             <th>Service</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,14 @@
                                 <td>${contract.getEmployeeName()}</td>
                                 <td>${contract.getCustomerName()}</td>
                                 <td>${contract.getServiceName()}</td>
+                                <td>
+                                    <form action="/contract_detail_add_forms" method="post">
+                                        <input type="hidden" name="contractIdToDetail" value="${contract.getContractId()}">
+                                        <button class="btn btn-sm btn-info" type="submit">
+                                            Add Attach Service
+                                        </button>
+                                    </form>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

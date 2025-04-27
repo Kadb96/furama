@@ -11,5 +11,6 @@
     <div class="list-group">
         <a href="/contracts" class="list-group-item list-group-item-action">Contract List</a>
         <a href="/contract_add_forms" class="list-group-item list-group-item-action">Add Contract</a>
+        <a href="/contract_detail_add_forms" class="list-group-item list-group-item-action">Add Contract Detail</a>
     </div>
 </div>

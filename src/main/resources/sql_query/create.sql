@@ -91,14 +91,13 @@ CREATE TABLE service (
         REFERENCES service_type (service_type_id)
 );
 
--- CREATE TABLE dich_vu_di_kem (
---     ma_dich_vu_di_kem INT PRIMARY KEY,
---     ten_dich_vu_di_kem varchar(45),
---     gia DOUBLE NOT NULL,
---     don_vi VARCHAR(10) NOT NULL,
---     trang_thai VARCHAR(45),
---     is_delete BOOLEAN DEFAULT(0) NOT NULL
--- );
+CREATE TABLE attach_service (
+    attach_service_id INT PRIMARY KEY AUTO_INCREMENT,
+    attach_service_name VARCHAR(45) NOT NULL,
+    attach_service_price DOUBLE NOT NULL,
+    attach_service_unit VARCHAR(10) NOT NULL,
+    attach_service_status VARCHAR(45)
+);
 
 CREATE TABLE contract (
     contract_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -117,14 +116,13 @@ CREATE TABLE contract (
         REFERENCES service (service_id)
 );
 
--- CREATE TABLE hop_dong_chi_tiet (
---     ma_hop_dong_chi_tiet INT PRIMARY KEY,
---     ma_hop_dong INT NOT NULL,
---     ma_dich_vu_di_kem INT NOT NULL,
---     so_luong INT NOT NULL,
---     is_delete BOOLEAN DEFAULT(0) NOT NULL,
---     FOREIGN KEY (ma_hop_dong)
---         REFERENCES hop_dong (ma_hop_dong),
---     FOREIGN KEY (ma_dich_vu_di_kem)
---         REFERENCES dich_vu_di_kem (ma_dich_vu_di_kem)
--- );
+CREATE TABLE contract_detail (
+    contract_detail_id INT PRIMARY KEY AUTO_INCREMENT,
+    contract_id INT NOT NULL,
+    attach_service_id INT NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (contract_id)
+        REFERENCES contract (contract_id),
+    FOREIGN KEY (attach_service_id)
+        REFERENCES attach_service (attach_service_id)
+);

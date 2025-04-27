@@ -5,7 +5,7 @@ import com.codegym.furama.model.Division;
 import com.codegym.furama.model.EducationDegree;
 import com.codegym.furama.model.Employee;
 import com.codegym.furama.model.Position;
-import com.codegym.furama.service.*;
+import com.codegym.furama.service.employee_service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
