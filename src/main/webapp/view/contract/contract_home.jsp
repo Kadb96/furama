@@ -26,6 +26,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                         <tr>
+                            <th>Detail</th>
                             <th>ID</th>
                             <th>Start Date</th>
                             <th>End Date</th>
@@ -38,8 +39,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${contractList}" var="contract">
+                        <c:forEach items="${contractList}" var="contract" varStatus="loop">
                             <tr>
+                                <td>
+                                    <button class="btn btn-sm btn-info" data-bs-toggle="collapse"
+                                            data-bs-target="#contracts${loop.index}">
+                                        Detail
+                                    </button>
+                                </td>
                                 <td>${contract.getContractId()}</td>
                                 <td>${contract.getContractStartDateString()}</td>
                                 <td>${contract.getContractEndDateString()}</td>
@@ -49,12 +56,79 @@
                                 <td>${contract.getCustomerName()}</td>
                                 <td>${contract.getServiceName()}</td>
                                 <td>
-                                    <form action="/contract_detail_add_forms" method="post">
-                                        <input type="hidden" name="contractIdToDetail" value="${contract.getContractId()}">
-                                        <button class="btn btn-sm btn-info" type="submit">
+                                    <form action="/contract_detail_add_forms" method="post" class="my-0">
+                                        <input type="hidden" name="contractIdToDetail"
+                                               value="${contract.getContractId()}">
+                                        <button class="btn btn-sm btn-success" type="submit">
                                             Add Attach Service
                                         </button>
                                     </form>
+                                    <button class="btn btn-sm btn-primary me-1"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editContractModal"
+                                            onclick="getEditingContractInfo(`${contract.getContractId()}`,
+                                                    `${contract.getContractStartDateString()}`,
+                                                    `${contract.getContractEndDateString()}`,
+                                                    `${contract.getContractDeposit()}`,
+                                                    `${contract.getContractTotalMoney()}`,
+                                                    `${contract.getEmployeeId()}`, `${contract.getCustomerId()}`,
+                                                    `${contract.getServiceId()}`)">
+                                        Edit
+                                    </button>
+                                    <button class="btn btn-sm btn-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteContractModal">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="11" class="p-0">
+                                    <div id="contracts${loop.index}" class="collapse">
+                                        <div class="bg-light p-3">
+                                            <h6 class="mb-3">Attach Services</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Contract Detail ID</th>
+                                                        <th>Contract Id</th>
+                                                        <th>Attach Service ID</th>
+                                                        <th>Attach Service Name</th>
+                                                        <th>Quantity</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <c:forEach items="${contractDetailList}" var="contractDetail">
+                                                        <c:if test="${contract.getContractId() == contractDetail.getContractId()}">
+                                                            <tr>
+                                                                <td>${contractDetail.getContractDetailId()}</td>
+                                                                <td>${contractDetail.getContractId()}</td>
+                                                                <td>${contractDetail.getAttachServiceId()}</td>
+                                                                <td>${contractDetail.getAttachServiceName()}</td>
+                                                                <td>${contractDetail.getQuantity()}</td>
+                                                                <td>
+                                                                    <button class="btn btn-sm btn-primary me-1"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#editModal">
+                                                                        Edit
+                                                                    </button>
+                                                                    <button class="btn btn-sm btn-danger"
+                                                                            data-bs-toggle="modal"
+                                                                            data-bs-target="#deleteModal">
+                                                                        Delete
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </c:if>
+                                                    </c:forEach>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -109,5 +183,97 @@
     </div>
 </main>
 <c:import url="/view/layout/footer.jsp"/>
+
+<%--edit contract modal--%>
+<div class="modal fade" id="editContractModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Contract</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm" action="/contracts" method="post">
+                    <input type="hidden" name="action" value="updateContract">
+                    <div class="mb-3">
+                        <label class="form-label" for="editingContractId">Contract ID</label>
+                        <input type="text" class="form-control" id="editingContractId" name="contractId" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingContractStartDate">Start Date</label>
+                        <input type="text" class="form-control" id="editingContractStartDate" name="contractStartDate"
+                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingContractEndDate">End Date</label>
+                        <input type="text" class="form-control" id="editingContractEndDate" name="contractEndDate"
+                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingContractDeposit">Deposit</label>
+                        <input type="number" class="form-control" id="editingContractDeposit" name="contractDeposit"
+                               required pattern="[0-9]+" maxlength="45">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingContractTotalMoney">Total Money</label>
+                        <input type="number" class="form-control" id="editingContractTotalMoney" name="contractTotalMoney"
+                               required pattern="[0-9]+" maxlength="45">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingEmployeeId">Employee</label>
+                        <select class="form-select" name="employeeId" id="editingEmployeeId">
+                            <c:forEach items="${employeeList}" var="employee">
+                                <option value="${employee.getEmployeeId()}"
+                                        id="optionEmployee${employee.getEmployeeId()}">
+                                        ${employee.getEmployeeName()}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingCustomerId">Customer</label>
+                        <select class="form-select" name="customerId" id="editingCustomerId">
+                            <c:forEach items="${customerList}" var="customer">
+                                <option value="${customer.getCustomerId()}"
+                                        id="optionCustomer${customer.getCustomerId()}">
+                                        ${customer.getCustomerName()}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="editingServiceId">Service</label>
+                        <select class="form-select" name="serviceId" id="editingServiceId">
+                            <c:forEach items="${serviceList}" var="service">
+                                <option value="${service.getServiceId()}"
+                                        id="optionService${service.getServiceId()}">
+                                        ${service.getServiceName()}
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" form="editForm">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getEditingContractInfo(editingContractId, editingContractStartDate, editingContractEndDate,
+                                    editingContractDeposit, editingContractTotalMoney, editingEmployeeId,
+                                    editingCustomerId, editingServiceId) {
+        document.getElementById("editingContractId").value = editingContractId;
+        document.getElementById("editingContractStartDate").value = editingContractStartDate;
+        document.getElementById("editingContractEndDate").value = editingContractEndDate;
+        document.getElementById("editingContractDeposit").value = editingContractDeposit;
+        document.getElementById("editingContractTotalMoney").value = editingContractTotalMoney;
+        document.getElementById("optionEmployee" + editingEmployeeId).selected = true;
+        document.getElementById("optionCustomer" + editingCustomerId).selected = true;
+        document.getElementById("optionService" + editingServiceId).selected = true;
+    }
+</script>
 </body>
 </html>

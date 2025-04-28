@@ -1,10 +1,10 @@
 package com.codegym.furama.controller;
 
-import com.codegym.furama.dto.ContractDto;
-import com.codegym.furama.dto.CustomerDto;
-import com.codegym.furama.dto.EmployeeDto;
-import com.codegym.furama.dto.ServiceDto;
+import com.codegym.furama.dto.*;
+import com.codegym.furama.model.Contract;
+import com.codegym.furama.service.contract_service.ContractDetailService;
 import com.codegym.furama.service.contract_service.ContractService;
+import com.codegym.furama.service.contract_service.IContractDetailService;
 import com.codegym.furama.service.contract_service.IContractService;
 import com.codegym.furama.service.customer_repository.CustomerService;
 import com.codegym.furama.service.customer_repository.ICustomerService;
@@ -19,9 +19,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-@WebServlet (name = "ContractController", value = "/contracts")
+@WebServlet(name = "ContractController", value = "/contracts")
 public class ContractController extends HttpServlet {
     //ket noi ContractService
     private IContractService contractService = new ContractService();
@@ -35,6 +37,9 @@ public class ContractController extends HttpServlet {
     //ket noi ServiceService
     private IServiceService serviceService = new ServiceService();
 
+    //ket noi ContractDetailService
+    private IContractDetailService contractDetailService = new ContractDetailService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //lay du lieu action
@@ -47,6 +52,22 @@ public class ContractController extends HttpServlet {
         switch (action) {
             case "showContractByPage":
                 showContractByPage(req, resp);
+                break;
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //lay du lieu action
+        String action = req.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+
+        //function cho moi action
+        switch (action) {
+            case "updateContract":
+                updateContract(req, resp);
                 break;
         }
     }
@@ -89,6 +110,9 @@ public class ContractController extends HttpServlet {
         //Lay serviceList
         List<ServiceDto> serviceList = serviceService.showAll();
 
+        //lay contractDetailList
+        List<ContractDetailDto> contractDetailList = contractDetailService.showAll();
+
         //tao attribute cho jsp
         req.setAttribute("contractList", contractList);
         req.setAttribute("pageNum", pageNum);
@@ -96,8 +120,33 @@ public class ContractController extends HttpServlet {
         req.setAttribute("employeeList", employeeList);
         req.setAttribute("customerList", customerList);
         req.setAttribute("serviceList", serviceList);
+        req.setAttribute("contractDetailList", contractDetailList);
 
         //chuyen tiep toi jsp
         req.getRequestDispatcher("/view/contract/contract_home.jsp").forward(req, resp);
+    }
+
+
+    private void updateContract(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //lay thong tin contract can chinh sua
+        int contractId = Integer.parseInt(req.getParameter("contractId"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String contractStartDateString = req.getParameter("contractStartDate");
+        String contractEndDateString = req.getParameter("contractEndDate");
+        LocalDate contractStartDate = LocalDate.parse(contractStartDateString, formatter);
+        LocalDate contractEndDate = LocalDate.parse(contractEndDateString, formatter);
+        double contractDeposit = Double.parseDouble(req.getParameter("contractDeposit"));
+        double contractTotalMoney = Double.parseDouble(req.getParameter("contractTotalMoney"));
+        int employeeId = Integer.parseInt(req.getParameter("employeeId"));
+        int customerId = Integer.parseInt(req.getParameter("customerId"));
+        int serviceId = Integer.parseInt(req.getParameter("serviceId"));
+
+        //update thong tin moi cua khach hang
+        Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit,
+                contractTotalMoney, employeeId, customerId, serviceId);
+        contractService.update(contractId, contract);
+
+        //chuyen tiep toi jsp
+        showContractByPage(req, resp);
     }
 }

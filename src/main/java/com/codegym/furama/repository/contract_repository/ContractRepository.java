@@ -24,6 +24,9 @@ public class ContractRepository implements IContractRepository {
             "contract.contract_id LIMIT ?, 5;";
     private final String ADD = "INSERT INTO contract (contract_start_date, contract_end_date, contract_deposit, " +
             "contract_total_money, employee_id, customer_id, service_id) values (?, ?, ?, ?, ?, ?, ?)";
+    private final String UPDATE = "UPDATE contract SET contract_start_date = ?, contract_end_date = ?, " +
+            "contract_deposit = ?, contract_total_money = ?, employee_id = ?, customer_id = ?, service_id = ? " +
+            "WHERE contract_id = ?";
 
 
     @Override
@@ -131,6 +134,23 @@ public class ContractRepository implements IContractRepository {
 
     @Override
     public boolean update(int contractId, Contract contract) {
+        Connection connection = BaseRepository.getConnectDB();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
+            preparedStatement.setString(1, contract.getContractStartDateStringSql());
+            preparedStatement.setString(2, contract.getContractEndDateStringSql());
+            preparedStatement.setDouble(3, contract.getContractDeposit());
+            preparedStatement.setDouble(4, contract.getContractTotalMoney());
+            preparedStatement.setInt(5, contract.getEmployeeId());
+            preparedStatement.setInt(6, contract.getCustomerId());
+            preparedStatement.setInt(7, contract.getServiceId());
+            preparedStatement.setInt(8, contractId);
+            if (preparedStatement.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return false;
     }
 }

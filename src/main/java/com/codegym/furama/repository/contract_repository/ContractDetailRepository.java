@@ -29,11 +29,12 @@ public class ContractDetailRepository implements IContractDetailRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int contractDetailId = resultSet.getInt("contract_detail_id");
                 int contractId = resultSet.getInt("contract_id");
                 int attachServiceId = resultSet.getInt("attach_service_id");
                 int quantity = resultSet.getInt("quantity");
                 String attachServiceName = resultSet.getString("attach_service_name");
-                ContractDetailDto contractDetail = new ContractDetailDto(contractId, attachServiceId, quantity,
+                ContractDetailDto contractDetail = new ContractDetailDto(contractDetailId, contractId, attachServiceId, quantity,
                         attachServiceName);
                 contractDetailList.add(contractDetail);
             }
