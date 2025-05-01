@@ -11,6 +11,6 @@ public interface IServiceService {
     List<ServiceDto> searchAll(String keyword);
     List<ServiceDto> searchByPage(int page, String keyword);
     boolean add(Service service);
-    boolean delete(int serviceId);
-    boolean update(int serviceId, Service service);
+    boolean delete(String serviceId);
+    boolean update(String serviceId, Service service);
 }

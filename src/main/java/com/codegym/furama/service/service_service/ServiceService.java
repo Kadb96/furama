@@ -37,12 +37,12 @@ public class ServiceService implements IServiceService {
     }
 
     @Override
-    public boolean delete(int serviceId) {
+    public boolean delete(String serviceId) {
         return serviceRepository.delete(serviceId);
     }
 
     @Override
-    public boolean update(int serviceId, Service service) {
+    public boolean update(String serviceId, Service service) {
         return serviceRepository.update(serviceId, service);
     }
 }

@@ -74,7 +74,7 @@ CREATE TABLE rent_type (
 );
 
 CREATE TABLE service (
-    service_id INT PRIMARY KEY AUTO_INCREMENT,
+    service_id VARCHAR(45) PRIMARY KEY,
     service_name VARCHAR(45) NOT NULL,
     service_area INT,
     service_cost DOUBLE NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE contract (
     contract_total_money DOUBLE NOT NULL,
     employee_id INT NOT NULL,
     customer_id VARCHAR(45) NOT NULL,
-    service_id INT NOT NULL,
+    service_id VARCHAR(45) NOT NULL,
     FOREIGN KEY (employee_id)
         REFERENCES employee (employee_id),
     FOREIGN KEY (customer_id)

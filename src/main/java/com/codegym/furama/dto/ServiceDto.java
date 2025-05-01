@@ -6,7 +6,7 @@ public class ServiceDto extends Service {
     private String rentTypeName;
     private String serviceTypeName;
 
-    public ServiceDto(int serviceId, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople,
+    public ServiceDto(String serviceId, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople,
                       int rentTypeId, int serviceTypeId, String standardRoom, String descriptionOtherConvenience,
                       double poolArea, int numberOfFloors, String rentTypeName, String serviceTypeName) {
         super(serviceId, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeId, serviceTypeId,

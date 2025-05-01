@@ -32,6 +32,12 @@
                                     <div class="row g-3">
                                         <input type="hidden" name="action" value="addNewService">
                                         <div class="col-md-6">
+                                            <label for="serviceId" class="form-label">Service ID</label>
+                                            <input type="text" name="serviceId" class="form-control"
+                                                   id="serviceId" placeholder="DV-XXXX" required
+                                                   pattern="^DV-[0-9]{4}$" maxlength="45">
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="serviceName" class="form-label">Service Name</label>
                                             <input type="text" name="serviceName" class="form-control"
                                                    id="serviceName" placeholder="Enter service's name" required

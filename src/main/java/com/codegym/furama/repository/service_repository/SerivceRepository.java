@@ -16,7 +16,7 @@ public class SerivceRepository implements IServiceRepository {
     private final String SHOW_ALL = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id ORDER BY s.service_id;";
     private final String SEARCH_ALL = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id WHERE s.service_name LIKE ? ORDER BY s.service_id;";
     private final String SEARCH_BY_PAGE = "SELECT s.*, rt.rent_type_name, st.service_type_name FROM service s JOIN rent_type rt ON s.rent_type_id = rt.rent_type_id JOIN service_type st ON s.service_type_id = st.service_type_id WHERE s.service_name LIKE ? ORDER BY s.service_id LIMIT ?, 5;";
-    private final String ADD = "INSERT INTO service(service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room, description_other_convenience, pool_area, number_of_floors) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private final String ADD = "INSERT INTO service(service_id, service_name, service_area, service_cost, service_max_people, rent_type_id, service_type_id, standard_room, description_other_convenience, pool_area, number_of_floors) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
     @Override
     public List<ServiceDto> showAll() {
@@ -26,7 +26,7 @@ public class SerivceRepository implements IServiceRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int serviceId = resultSet.getInt("service_id");
+                String serviceId = resultSet.getString("service_id");
                 String serviceName = resultSet.getString("service_name");
                 int serviceArea = resultSet.getInt("service_area");
                 double serviceCost = resultSet.getDouble("service_cost");
@@ -66,7 +66,7 @@ public class SerivceRepository implements IServiceRepository {
             preparedStatement.setString(1, "%" + keyword + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int serviceId = resultSet.getInt("service_id");
+                String serviceId = resultSet.getString("service_id");
                 String serviceName = resultSet.getString("service_name");
                 int serviceArea = resultSet.getInt("service_area");
                 double serviceCost = resultSet.getDouble("service_cost");
@@ -101,7 +101,7 @@ public class SerivceRepository implements IServiceRepository {
             preparedStatement.setInt(2, (page - 1) * 5);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int serviceId = resultSet.getInt("service_id");
+                String serviceId = resultSet.getString("service_id");
                 String serviceName = resultSet.getString("service_name");
                 int serviceArea = resultSet.getInt("service_area");
                 double serviceCost = resultSet.getDouble("service_cost");
@@ -131,16 +131,17 @@ public class SerivceRepository implements IServiceRepository {
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD);
-            preparedStatement.setString(1, service.getServiceName());
-            preparedStatement.setInt(2, service.getServiceArea());
-            preparedStatement.setDouble(3, service.getServiceCost());
-            preparedStatement.setInt(4, service.getServiceMaxPeople());
-            preparedStatement.setInt(5, service.getRentTypeId());
-            preparedStatement.setInt(6, service.getServiceTypeId());
-            preparedStatement.setString(7, service.getStandardRoom());
-            preparedStatement.setString(8, service.getDescriptionOtherConvenience());
-            preparedStatement.setDouble(9, service.getPoolArea());
-            preparedStatement.setInt(10, service.getNumberOfFloors());
+            preparedStatement.setString(1, service.getServiceId());
+            preparedStatement.setString(2, service.getServiceName());
+            preparedStatement.setInt(3, service.getServiceArea());
+            preparedStatement.setDouble(4, service.getServiceCost());
+            preparedStatement.setInt(5, service.getServiceMaxPeople());
+            preparedStatement.setInt(6, service.getRentTypeId());
+            preparedStatement.setInt(7, service.getServiceTypeId());
+            preparedStatement.setString(8, service.getStandardRoom());
+            preparedStatement.setString(9, service.getDescriptionOtherConvenience());
+            preparedStatement.setDouble(10, service.getPoolArea());
+            preparedStatement.setInt(11, service.getNumberOfFloors());
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -151,12 +152,12 @@ public class SerivceRepository implements IServiceRepository {
     }
 
     @Override
-    public boolean delete(int serviceId) {
+    public boolean delete(String serviceId) {
         return false;
     }
 
     @Override
-    public boolean update(int serviceId, Service service) {
+    public boolean update(String serviceId, Service service) {
         return false;
     }
 }

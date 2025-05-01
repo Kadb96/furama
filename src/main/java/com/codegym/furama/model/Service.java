@@ -4,7 +4,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class Service {
-    private int serviceId;
+    private String serviceId;
     private String serviceName;
     private int serviceArea;
     private double serviceCost;
@@ -16,7 +16,7 @@ public class Service {
     private double poolArea;
     private int numberOfFloors;
 
-    public Service(int serviceId, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople,
+    public Service(String serviceId, String serviceName, int serviceArea, double serviceCost, int serviceMaxPeople,
                    int rentTypeId, int serviceTypeId, String standardRoom, String descriptionOtherConvenience,
                    double poolArea, int numberOfFloors) {
         this.serviceId = serviceId;
@@ -50,11 +50,11 @@ public class Service {
     public Service() {
     }
 
-    public int getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(int serviceId) {
+    public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
 

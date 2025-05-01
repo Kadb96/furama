@@ -84,7 +84,7 @@ public class ContractAddFormController extends HttpServlet {
         double contractTotalMoney = Double.parseDouble(req.getParameter("contractTotalMoney"));
         int employeeId = Integer.parseInt(req.getParameter("employeeId"));
         String customerId = req.getParameter("customerId");
-        int serviceId = Integer.parseInt(req.getParameter("serviceId"));
+        String serviceId = req.getParameter("serviceId");
 
         //tao contract moi
         Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit, contractTotalMoney,

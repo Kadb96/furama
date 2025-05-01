@@ -57,6 +57,7 @@ public class ServiceAddFormController extends HttpServlet {
 
     private void addNewService(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         //lay thong tin Service
+        String serviceID = req.getParameter("serviceId");
         String serviceName = req.getParameter("serviceName");
         int serviceArea = Integer.parseInt(req.getParameter("serviceArea"));
         double serviceCost = Double.parseDouble(req.getParameter("serviceCost"));
@@ -69,7 +70,7 @@ public class ServiceAddFormController extends HttpServlet {
         int numberOfFloors = Integer.parseInt(req.getParameter("numberOfFloors"));
 
         //tao service moi
-        Service service = new Service(serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeId,
+        Service service = new Service(serviceID, serviceName, serviceArea, serviceCost, serviceMaxPeople, rentTypeId,
                 serviceTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors);
         serviceService.add(service);
 
