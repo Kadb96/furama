@@ -73,8 +73,8 @@
                                         <div class="col-md-6">
                                             <label for="customerIdCard" class="form-label">ID Card Number</label>
                                             <input type="text" class="form-control" id="customerIdCard"
-                                                   placeholder="Enter ID card number" name="customerIdCard" required
-                                                   pattern="[0-9]+" maxlength="45">
+                                                   placeholder="XXX XXX XXX / XXX XXX XXX XXX" name="customerIdCard" required
+                                                   pattern="([0-9]{9})([0-9]{3})?" maxlength="45">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="customerPhone" class="form-label">Phone Number</label>
