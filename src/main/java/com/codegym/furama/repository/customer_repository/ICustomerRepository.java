@@ -11,6 +11,6 @@ public interface ICustomerRepository {
     List<CustomerDto> searchAll(String keyword);
     List<CustomerDto> searchByPage(int page, String keyword);
     boolean add(Customer customer);
-    boolean delete(int customerId);
-    boolean update(int customerId, Customer customer);
+    boolean delete(String customerId);
+    boolean update(String customerId, Customer customer);
 }

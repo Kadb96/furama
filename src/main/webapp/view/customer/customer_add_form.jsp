@@ -32,6 +32,12 @@
                                     <div class="row g-3">
                                         <input type="hidden" name="action" value="addNewCustomer">
                                         <div class="col-md-6">
+                                            <label for="customerId" class="form-label">Customer Id</label>
+                                            <input type="text" name="customerName" class="form-control"
+                                                   id="customerId" placeholder="KH-XXXX" required
+                                                   pattern="^KH-[0-9]{4}$" maxlength="45">
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="customerName" class="form-label">Customer Name</label>
                                             <input type="text" name="customerName" class="form-control"
                                                    id="customerName" placeholder="Enter full customer name" required

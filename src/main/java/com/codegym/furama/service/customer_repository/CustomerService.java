@@ -37,12 +37,12 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public boolean delete(int customerId) {
+    public boolean delete(String customerId) {
         return customerRepository.delete(customerId);
     }
 
     @Override
-    public boolean update(int customerId, Customer customer) {
+    public boolean update(String customerId, Customer customer) {
         return customerRepository.update(customerId, customer);
     }
 }

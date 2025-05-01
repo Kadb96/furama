@@ -54,6 +54,7 @@ public class CustomerAddFormController extends HttpServlet {
 
     private void addNewCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //lay thong tin khach hang
+        String customerId = req.getParameter("customerId");
         int customerTypeId = Integer.parseInt(req.getParameter("customerTypeId"));
         String customerName = req.getParameter("customerName");
         String customerBirthdayString = req.getParameter("customerBirthday");
@@ -66,7 +67,7 @@ public class CustomerAddFormController extends HttpServlet {
         String customerAddress = req.getParameter("customerAddress");
 
         //tao khach hang moi
-        Customer customer = new Customer(customerTypeId, customerName, customerBirthday, customerGender, customerIdCard,
+        Customer customer = new Customer(customerId, customerTypeId, customerName, customerBirthday, customerGender, customerIdCard,
                 customerPhone, customerEmail, customerAddress);
         customerService.add(customer);
 

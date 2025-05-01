@@ -112,7 +112,7 @@ public class CustomerController extends HttpServlet {
 
     private void deleteCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //lay thong tin customerId cua khach hang can xoa
-        int customerId = Integer.parseInt(req.getParameter("customerId"));
+        String customerId = req.getParameter("customerId");
 
         //xoa khach hang
         customerService.delete(customerId);
@@ -123,7 +123,7 @@ public class CustomerController extends HttpServlet {
 
     private void updateCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //lay thong tin customerId cua khach hang can chinh sua
-        int customerId = Integer.parseInt(req.getParameter("customerId"));
+        String customerId = req.getParameter("customerId");
         int customerTypeId = Integer.parseInt(req.getParameter("customerTypeId"));
         String customerName = req.getParameter("customerName");
         String customerBirthdayString = req.getParameter("customerBirthday");

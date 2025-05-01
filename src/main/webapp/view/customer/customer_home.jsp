@@ -145,7 +145,8 @@
                     <input type="hidden" name="action" value="updateCustomer">
                     <div class="mb-3">
                         <label class="form-label" for="editingCustomerId">Customer ID</label>
-                        <input type="text" class="form-control" id="editingCustomerId" name="customerId" readonly>
+                        <input type="text" class="form-control bg-secondary text-white" id="editingCustomerId" name="customerId"
+                               readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editingCustomerTypeId">Customer Type</label>

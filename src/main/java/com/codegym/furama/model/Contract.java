@@ -12,11 +12,11 @@ public class Contract {
     private double contractDeposit;
     private double contractTotalMoney;
     private int employeeId;
-    private int customerId;
+    private String customerId;
     private int serviceId;
 
     public Contract(int contractId, LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                    double contractTotalMoney, int employeeId, int customerId, int serviceId) {
+                    double contractTotalMoney, int employeeId, String customerId, int serviceId) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
@@ -28,7 +28,7 @@ public class Contract {
     }
 
     public Contract(LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                    double contractTotalMoney, int employeeId, int customerId, int serviceId) {
+                    double contractTotalMoney, int employeeId, String customerId, int serviceId) {
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
@@ -89,11 +89,11 @@ public class Contract {
         this.employeeId = employeeId;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 

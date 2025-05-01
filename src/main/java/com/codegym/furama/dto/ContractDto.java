@@ -10,7 +10,7 @@ public class ContractDto extends Contract {
     String serviceName;
 
     public ContractDto(int contractId, LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                       double contractTotalMoney, int employeeId, int customerId, int serviceId, String employeeName,
+                       double contractTotalMoney, int employeeId, String customerId, int serviceId, String employeeName,
                        String customerName, String serviceName) {
         super(contractId, contractStartDate, contractEndDate, contractDeposit, contractTotalMoney, employeeId,
                 customerId, serviceId);
@@ -20,7 +20,7 @@ public class ContractDto extends Contract {
     }
 
     public ContractDto(LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                       double contractTotalMoney, int employeeId, int customerId, int serviceId, String employeeName,
+                       double contractTotalMoney, int employeeId, String customerId, int serviceId, String employeeName,
                        String customerName, String serviceName) {
         super(contractStartDate, contractEndDate, contractDeposit, contractTotalMoney, employeeId, customerId, serviceId);
         this.employeeName = employeeName;

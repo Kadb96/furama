@@ -51,7 +51,7 @@ CREATE TABLE customer_type (
 );
 
 CREATE TABLE customer (
-    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id VARCHAR(45) PRIMARY KEY,
     customer_type_id INT NOT NULL,
     customer_name VARCHAR(45) NOT NULL,
     customer_birthday DATE NOT NULL,
@@ -106,7 +106,7 @@ CREATE TABLE contract (
     contract_deposit DOUBLE NOT NULL,
     contract_total_money DOUBLE NOT NULL,
     employee_id INT NOT NULL,
-    customer_id INT NOT NULL,
+    customer_id VARCHAR(45) NOT NULL,
     service_id INT NOT NULL,
     FOREIGN KEY (employee_id)
         REFERENCES employee (employee_id),

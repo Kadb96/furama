@@ -10,7 +10,7 @@ public class CustomerDto extends Customer {
 
     public CustomerDto() {}
 
-    public CustomerDto(int customerId, int customerTypeId, String customerName, LocalDate customerBirthday,
+    public CustomerDto(String customerId, int customerTypeId, String customerName, LocalDate customerBirthday,
                        boolean customerGender, String customerIdCard, String customerPhone, String customerEmail,
                        String customerAddress, String customerTypeName) {
         super(customerId, customerTypeId, customerName, customerBirthday, customerGender, customerIdCard, customerPhone, customerEmail, customerAddress);

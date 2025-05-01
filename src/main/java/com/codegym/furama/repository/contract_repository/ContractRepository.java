@@ -46,7 +46,7 @@ public class ContractRepository implements IContractRepository {
                 double contractDeposit = resultSet.getDouble("contract_deposit");
                 double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 int employeeId = resultSet.getInt("employee_id");
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int serviceId = resultSet.getInt("service_id");
                 String employeeName = resultSet.getString("employee_name");
                 String customerName = resultSet.getString("customer_name");
@@ -79,7 +79,7 @@ public class ContractRepository implements IContractRepository {
                 double contractDeposit = resultSet.getDouble("contract_deposit");
                 double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 int employeeId = resultSet.getInt("employee_id");
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int serviceId = resultSet.getInt("service_id");
                 String employeeName = resultSet.getString("employee_name");
                 String customerName = resultSet.getString("customer_name");
@@ -116,7 +116,7 @@ public class ContractRepository implements IContractRepository {
             preparedStatement.setDouble(3, contract.getContractDeposit());
             preparedStatement.setDouble(4, contract.getContractTotalMoney());
             preparedStatement.setInt(5, contract.getEmployeeId());
-            preparedStatement.setInt(6, contract.getCustomerId());
+            preparedStatement.setString(6, contract.getCustomerId());
             preparedStatement.setInt(7, contract.getServiceId());
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
@@ -142,7 +142,7 @@ public class ContractRepository implements IContractRepository {
             preparedStatement.setDouble(3, contract.getContractDeposit());
             preparedStatement.setDouble(4, contract.getContractTotalMoney());
             preparedStatement.setInt(5, contract.getEmployeeId());
-            preparedStatement.setInt(6, contract.getCustomerId());
+            preparedStatement.setString(6, contract.getCustomerId());
             preparedStatement.setInt(7, contract.getServiceId());
             preparedStatement.setInt(8, contractId);
             if (preparedStatement.executeUpdate() == 1) {

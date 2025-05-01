@@ -19,7 +19,7 @@ public class CustomerRepository implements ICustomerRepository {
     private final String SHOW_BY_PAGE = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id ORDER BY c.customer_id LIMIT ?, 5;";
     private final String SEARCH_ALL = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id WHERE c.customer_name LIKE ? ORDER BY c.customer_id;";
     private final String SEARCH_BY_PAGE = "SELECT c.*, ct.customer_type_name FROM customer c JOIN customer_type ct ON c.customer_type_id = ct.customer_type_id WHERE c.customer_name LIKE ? ORDER BY c.customer_id LIMIT ?, 5;";
-    private final String ADD = "INSERT INTO customer(customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) values (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String ADD = "INSERT INTO customer(customer_id, customer_type_id, customer_name, customer_birthday, customer_gender, customer_id_card, customer_phone, customer_email, customer_address) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private final String DELETE = "DELETE FROM customer WHERE customer_id = ?";
     private final String UPDATE = "UPDATE customer SET customer_type_id = ?, customer_name = ?, customer_birthday = ?, customer_gender = ?, customer_id_card = ?, customer_phone = ?, customer_email = ?, customer_address = ? WHERE customer_id = ?";
 
@@ -31,7 +31,7 @@ public class CustomerRepository implements ICustomerRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(SHOW_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int customerTypeId = resultSet.getInt("customer_type_id");
                 String customerName = resultSet.getString("customer_name");
                 String customerBirthdayString = resultSet.getString("customer_birthday");
@@ -62,7 +62,7 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setInt(1, (page - 1) * 5);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int customerTypeId = resultSet.getInt("customer_type_id");
                 String customerName = resultSet.getString("customer_name");
                 String customerBirthdayString = resultSet.getString("customer_birthday");
@@ -93,7 +93,7 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setString(1, "%" + keyword + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int customerTypeId = resultSet.getInt("customer_type_id");
                 String customerName = resultSet.getString("customer_name");
                 String customerBirthdayString = resultSet.getString("customer_birthday");
@@ -125,7 +125,7 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setInt(2, (page - 1) * 5);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int customerId = resultSet.getInt("customer_id");
+                String customerId = resultSet.getString("customer_id");
                 int customerTypeId = resultSet.getInt("customer_type_id");
                 String customerName = resultSet.getString("customer_name");
                 String customerBirthdayString = resultSet.getString("customer_birthday");
@@ -151,14 +151,15 @@ public class CustomerRepository implements ICustomerRepository {
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(ADD);
-            preparedStatement.setInt(1, customer.getCustomerTypeId());
-            preparedStatement.setString(2, customer.getCustomerName());
-            preparedStatement.setString(3, customer.getCustomerBirthdayStringSql());
-            preparedStatement.setBoolean(4, customer.isCustomerGender());
-            preparedStatement.setString(5, customer.getCustomerIdCard());
-            preparedStatement.setString(6, customer.getCustomerPhone());
-            preparedStatement.setString(7, customer.getCustomerEmail());
-            preparedStatement.setString(8, customer.getCustomerAddress());
+            preparedStatement.setString(1, customer.getCustomerId());
+            preparedStatement.setInt(2, customer.getCustomerTypeId());
+            preparedStatement.setString(3, customer.getCustomerName());
+            preparedStatement.setString(4, customer.getCustomerBirthdayStringSql());
+            preparedStatement.setBoolean(5, customer.isCustomerGender());
+            preparedStatement.setString(6, customer.getCustomerIdCard());
+            preparedStatement.setString(7, customer.getCustomerPhone());
+            preparedStatement.setString(8, customer.getCustomerEmail());
+            preparedStatement.setString(9, customer.getCustomerAddress());
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -169,11 +170,11 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public boolean delete(int customerId) {
+    public boolean delete(String customerId) {
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setString(1, customerId);
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -184,7 +185,7 @@ public class CustomerRepository implements ICustomerRepository {
     }
 
     @Override
-    public boolean update(int customerId, Customer customer) {
+    public boolean update(String customerId, Customer customer) {
         Connection connection = BaseRepository.getConnectDB();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE);
@@ -196,7 +197,7 @@ public class CustomerRepository implements ICustomerRepository {
             preparedStatement.setString(6, customer.getCustomerPhone());
             preparedStatement.setString(7, customer.getCustomerEmail());
             preparedStatement.setString(8, customer.getCustomerAddress());
-            preparedStatement.setInt(9, customerId);
+            preparedStatement.setString(9, customerId);
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }

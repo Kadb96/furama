@@ -138,7 +138,7 @@ public class ContractController extends HttpServlet {
         double contractDeposit = Double.parseDouble(req.getParameter("contractDeposit"));
         double contractTotalMoney = Double.parseDouble(req.getParameter("contractTotalMoney"));
         int employeeId = Integer.parseInt(req.getParameter("employeeId"));
-        int customerId = Integer.parseInt(req.getParameter("customerId"));
+        String customerId = req.getParameter("customerId");
         int serviceId = Integer.parseInt(req.getParameter("serviceId"));
 
         //update thong tin moi cua khach hang

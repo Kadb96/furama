@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Customer {
-    private int customerId;
+    private String customerId;
     private int customerTypeId;
     private String customerName;
     private LocalDate customerBirthday;
@@ -18,7 +18,7 @@ public class Customer {
 
     public Customer() {}
 
-    public Customer(int customerId, int customerTypeId, String customerName, LocalDate customerBirthday,
+    public Customer(String customerId, int customerTypeId, String customerName, LocalDate customerBirthday,
                     boolean customerGender, String customerIdCard, String customerPhone, String customerEmail,
                     String customerAddress) {
         this.customerId = customerId;
@@ -44,11 +44,11 @@ public class Customer {
         this.customerAddress = customerAddress;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
