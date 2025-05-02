@@ -44,6 +44,9 @@
                                                    required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
                                         </div>
                                         <div class="col-md-6">
+                                            <input type="date" data-date-format="dd-mm-yyyy" class="input-group date" id="employeeBirthdayPicker">
+                                        </div>
+                                        <div class="col-md-6">
                                             <label for="employeeIdCard" class="form-label">ID Card Number</label>
                                             <input type="text" class="form-control" id="employeeIdCard"
                                                    placeholder="XXX XXX XXX / XXX XXX XXX XXX" name="employeeIdCard" required
@@ -58,9 +61,9 @@
                                         <div class="col-md-6">
                                             <label for="employeePhone" class="form-label">Phone Number</label>
                                             <input type="tel" class="form-control" id="employeePhone"
-                                                   name="employeePhone" placeholder="+84 353-682-333" required
-                                                   pattern="[+][0-9]{1,4}\s?[(]?[0-9]{1,4}[)]?[-\s]?[0-9]{1,10}"
-                                                   maxlength="45">
+                                                   name="employeePhone" required
+                                                   placeholder="090xxxxxxx / 091xxxxxxx / (84)+90xxxxxxx / (84)+91xxxxxxx"
+                                                   pattern="(090|091|\(84\)\+90|\(84\)\+91)[0-9]{7}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="employeeEmail" class="form-label">Email Address</label>

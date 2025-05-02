@@ -73,15 +73,15 @@
                                         <div class="col-md-6">
                                             <label for="customerIdCard" class="form-label">ID Card Number</label>
                                             <input type="text" class="form-control" id="customerIdCard"
-                                                   placeholder="XXX XXX XXX / XXX XXX XXX XXX" name="customerIdCard" required
-                                                   pattern="([0-9]{9})([0-9]{3})?" maxlength="45">
+                                                   placeholder="XXX XXX XXX / XXX XXX XXX XXX" name="customerIdCard"
+                                                   required pattern="([0-9]{9})([0-9]{3})?">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="customerPhone" class="form-label">Phone Number</label>
                                             <input type="tel" class="form-control" id="customerPhone"
-                                                   name="customerPhone" placeholder="+84 353-682-333" required
-                                                   pattern="[+][0-9]{1,4}\s?[(]?[0-9]{1,4}[)]?[-\s]?[0-9]{1,10}"
-                                                   maxlength="45">
+                                                   name="customerPhone" required
+                                                   placeholder="090xxxxxxx / 091xxxxxxx / (84)+90xxxxxxx / (84)+91xxxxxxx"
+                                                   pattern="(090|091|\(84\)\+90|\(84\)\+91)[0-9]{7}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="customerEmail" class="form-label">Email Address</label>
