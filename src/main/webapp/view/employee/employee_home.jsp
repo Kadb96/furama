@@ -145,7 +145,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Emplpyee</h5>
+                <h5 class="modal-title">Edit Employee</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -161,9 +161,13 @@
                                maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="editingEmployeeBirthday">Birthday</label>
-                        <input type="text" class="form-control" id="editingEmployeeBirthday" name="employeeBirthday"
-                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                        <label for="editingEmployeeBirthday" class="form-label">Birthday</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" id="editingEmployeeBirthday"
+                                   name="employeeBirthday" placeholder="dd/mm/yyyy" required
+                                   pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                   aria-label="Date">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editingEmployeeIdCard">ID Card</label>
@@ -286,6 +290,20 @@
         document.getElementById(selectOptionDivision).selected = true;
         document.getElementById("editingUsername").value = editingUsername;
     }
+</script>
+<script>
+    $(document).ready(function(){
+        $('#editingEmployeeBirthday').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true,
+            todayHighlight: true,
+            orientation: 'bottom auto',
+            templates: {
+                leftArrow: '&laquo;',
+                rightArrow: '&raquo;'
+            }
+        });
+    });
 </script>
 </body>
 </html>

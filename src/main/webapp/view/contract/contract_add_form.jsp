@@ -32,16 +32,24 @@
                                     <div class="row g-3">
                                         <input type="hidden" name="action" value="addNewContract">
                                         <div class="col-md-6">
-                                            <label for="contractStartDate" class="form-label">Start Date</label>
-                                            <input type="text" class="form-control" id="contractStartDate"
-                                                   placeholder="dd/mm/yyyy" name="contractStartDate"
-                                                   required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="contractStartDate" class="form-label">Start Date</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" id="contractStartDate"
+                                                       name="contractStartDate" placeholder="dd/mm/yyyy" required
+                                                       pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                                       aria-label="Date">
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="contractEndDate" class="form-label">End Date</label>
-                                            <input type="text" class="form-control" id="contractEndDate"
-                                                   placeholder="dd/mm/yyyy" name="contractEndDate"
-                                                   required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" id="contractEndDate"
+                                                       name="contractEndDate" placeholder="dd/mm/yyyy" required
+                                                       pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                                       aria-label="Date">
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="contractDeposit" class="form-label">Contract Deposit</label>

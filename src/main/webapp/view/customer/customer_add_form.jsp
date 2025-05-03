@@ -57,9 +57,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="customerBirthday" class="form-label">Birthday</label>
-                                            <input type="text" class="form-control" id="customerBirthday"
-                                                   placeholder="dd/mm/yyyy" name="customerBirthday"
-                                                   required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" id="customerBirthday"
+                                                       name="customerBirthday" placeholder="dd/mm/yyyy" required
+                                                       pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                                       aria-label="Date">
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="customerGender" class="form-label">Gender</label>
@@ -91,7 +94,8 @@
                                         <div class="col-6">
                                             <label for="customerAddress" class="form-label">Address</label>
                                             <input type="text" class="form-control" id="customerAddress"
-                                                   name="customerAddress" placeholder="Enter full address" maxlength="45">
+                                                   name="customerAddress" placeholder="Enter full address"
+                                                   maxlength="45">
                                         </div>
                                         <div class="col-12 mt-4 d-flex gap-2 justify-content-end">
                                             <button type="reset" class="btn btn-secondary">Clear Form</button>

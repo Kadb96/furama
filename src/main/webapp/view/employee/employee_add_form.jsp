@@ -39,12 +39,12 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label for="employeeBirthday" class="form-label">Birthday</label>
-                                            <input type="text" class="form-control" id="employeeBirthday"
-                                                   placeholder="dd/mm/yyyy" name="employeeBirthday"
-                                                   required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="date" data-date-format="dd-mm-yyyy" class="input-group date" id="employeeBirthdayPicker">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control datepicker" id="employeeBirthday"
+                                                       name="employeeBirthday" placeholder="dd/mm/yyyy" required
+                                                       pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                                       aria-label="Date">
+                                            </div>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="employeeIdCard" class="form-label">ID Card Number</label>

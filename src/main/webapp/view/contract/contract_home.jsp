@@ -200,14 +200,22 @@
                         <input type="text" class="form-control" id="editingContractId" name="contractId" readonly>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="editingContractStartDate">Start Date</label>
-                        <input type="text" class="form-control" id="editingContractStartDate" name="contractStartDate"
-                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                        <label for="editingContractStartDate" class="form-label">Start Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" id="editingContractStartDate"
+                                   name="contractStartDate" placeholder="dd/mm/yyyy" required
+                                   pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                   aria-label="Date">
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="editingContractEndDate">End Date</label>
-                        <input type="text" class="form-control" id="editingContractEndDate" name="contractEndDate"
-                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                        <label for="editingContractEndDate" class="form-label">End Date</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" id="editingContractEndDate"
+                                   name="contractEndtDate" placeholder="dd/mm/yyyy" required
+                                   pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                   aria-label="Date">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editingContractDeposit">Deposit</label>

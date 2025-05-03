@@ -145,7 +145,8 @@
                     <input type="hidden" name="action" value="updateCustomer">
                     <div class="mb-3">
                         <label class="form-label" for="editingCustomerId">Customer ID</label>
-                        <input type="text" class="form-control bg-secondary text-white" id="editingCustomerId" name="customerId"
+                        <input type="text" class="form-control bg-secondary text-white" id="editingCustomerId"
+                               name="customerId"
                                readonly>
                     </div>
                     <div class="mb-3">
@@ -164,10 +165,14 @@
                         <input type="text" class="form-control" id="editingCustomerName" name="customerName" required
                                maxlength="45">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="editingCustomerBirthday">Birthday</label>
-                        <input type="text" class="form-control" id="editingCustomerBirthday" name="customerBirthday"
-                               required pattern="^[0-9]{2}/[0-9]{2}/[0-9]{4}$">
+                    <div class="col-mb-3">
+                        <label for="editingCustomerBirthday" class="form-label">Birthday</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control datepicker" id="editingCustomerBirthday"
+                                   name="customerBirthday" placeholder="dd/mm/yyyy" required
+                                   pattern="^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$"
+                                   aria-label="Date">
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="editingCustomerGender">Gender</label>
