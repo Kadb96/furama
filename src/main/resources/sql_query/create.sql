@@ -104,7 +104,6 @@ CREATE TABLE contract (
     contract_start_date DATE NOT NULL,
     contract_end_date DATE NOT NULL,
     contract_deposit DOUBLE NOT NULL,
-    contract_total_money DOUBLE NOT NULL,
     employee_id INT NOT NULL,
     customer_id VARCHAR(45) NOT NULL,
     service_id VARCHAR(45) NOT NULL,

@@ -10,29 +10,26 @@ public class Contract {
     private LocalDate contractStartDate;
     private LocalDate contractEndDate;
     private double contractDeposit;
-    private double contractTotalMoney;
     private int employeeId;
     private String customerId;
     private String serviceId;
 
     public Contract(int contractId, LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                    double contractTotalMoney, int employeeId, String customerId, String serviceId) {
+                    int employeeId, String customerId, String serviceId) {
         this.contractId = contractId;
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
-        this.contractTotalMoney = contractTotalMoney;
         this.employeeId = employeeId;
         this.customerId = customerId;
         this.serviceId = serviceId;
     }
 
-    public Contract(LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit,
-                    double contractTotalMoney, int employeeId, String customerId, String serviceId) {
+    public Contract(LocalDate contractStartDate, LocalDate contractEndDate, double contractDeposit, int employeeId,
+                    String customerId, String serviceId) {
         this.contractStartDate = contractStartDate;
         this.contractEndDate = contractEndDate;
         this.contractDeposit = contractDeposit;
-        this.contractTotalMoney = contractTotalMoney;
         this.employeeId = employeeId;
         this.customerId = customerId;
         this.serviceId = serviceId;
@@ -71,14 +68,6 @@ public class Contract {
 
     public void setContractDeposit(double contractDeposit) {
         this.contractDeposit = contractDeposit;
-    }
-
-    public double getContractTotalMoney() {
-        return contractTotalMoney;
-    }
-
-    public void setContractTotalMoney(double contractTotalMoney) {
-        this.contractTotalMoney = contractTotalMoney;
     }
 
     public int getEmployeeId() {
@@ -128,10 +117,5 @@ public class Contract {
     public String getContractDepositString() {
         NumberFormat formatter = new DecimalFormat("###,###.###");
         return formatter.format(contractDeposit) + "đ";
-    }
-
-    public String getContractTotalMoneyString() {
-        NumberFormat formatter = new DecimalFormat("###,###.###");
-        return formatter.format(contractTotalMoney) + "đ";
     }
 }

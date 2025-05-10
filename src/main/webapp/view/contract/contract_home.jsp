@@ -69,10 +69,8 @@
                                             onclick="getEditingContractInfo(`${contract.getContractId()}`,
                                                     `${contract.getContractStartDateString()}`,
                                                     `${contract.getContractEndDateString()}`,
-                                                    `${contract.getContractDeposit()}`,
-                                                    `${contract.getContractTotalMoney()}`,
-                                                    `${contract.getEmployeeId()}`, `${contract.getCustomerId()}`,
-                                                    `${contract.getServiceId()}`)">
+                                                    `${contract.getContractDeposit()}`,`${contract.getEmployeeId()}`,
+                                                    `${contract.getCustomerId()}`,`${contract.getServiceId()}`)">
                                         Edit
                                     </button>
                                     <button class="btn btn-sm btn-danger"
@@ -223,11 +221,6 @@
                                required pattern="[0-9]+" maxlength="45">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label" for="editingContractTotalMoney">Total Money</label>
-                        <input type="number" class="form-control" id="editingContractTotalMoney" name="contractTotalMoney"
-                               required pattern="[0-9]+" maxlength="45">
-                    </div>
-                    <div class="mb-3">
                         <label class="form-label" for="editingEmployeeId">Employee</label>
                         <select class="form-select" name="employeeId" id="editingEmployeeId">
                             <c:forEach items="${employeeList}" var="employee">
@@ -271,13 +264,11 @@
 </div>
 <script>
     function getEditingContractInfo(editingContractId, editingContractStartDate, editingContractEndDate,
-                                    editingContractDeposit, editingContractTotalMoney, editingEmployeeId,
-                                    editingCustomerId, editingServiceId) {
+                                    editingContractDeposit, editingEmployeeId, editingCustomerId, editingServiceId) {
         document.getElementById("editingContractId").value = editingContractId;
         document.getElementById("editingContractStartDate").value = editingContractStartDate;
         document.getElementById("editingContractEndDate").value = editingContractEndDate;
         document.getElementById("editingContractDeposit").value = editingContractDeposit;
-        document.getElementById("editingContractTotalMoney").value = editingContractTotalMoney;
         document.getElementById("optionEmployee" + editingEmployeeId).selected = true;
         document.getElementById("optionCustomer" + editingCustomerId).selected = true;
         document.getElementById("optionService" + editingServiceId).selected = true;

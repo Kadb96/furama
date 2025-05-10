@@ -58,12 +58,6 @@
                                                    min="0">
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="contractTotalMoney" class="form-label">Contract Total Money</label>
-                                            <input type="number" class="form-control" id="contractTotalMoney"
-                                                   placeholder="Enter contract total money" name="contractTotalMoney" required
-                                                   min="0">
-                                        </div>
-                                        <div class="col-md-6">
                                             <label for="employee" class="form-label">Employee</label>
                                             <select class="form-select" id="employee" name="employeeId"
                                                     required>

@@ -136,14 +136,13 @@ public class ContractController extends HttpServlet {
         LocalDate contractStartDate = LocalDate.parse(contractStartDateString, formatter);
         LocalDate contractEndDate = LocalDate.parse(contractEndDateString, formatter);
         double contractDeposit = Double.parseDouble(req.getParameter("contractDeposit"));
-        double contractTotalMoney = Double.parseDouble(req.getParameter("contractTotalMoney"));
         int employeeId = Integer.parseInt(req.getParameter("employeeId"));
         String customerId = req.getParameter("customerId");
         String serviceId = req.getParameter("serviceId");
 
         //update thong tin moi cua khach hang
-        Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit,
-                contractTotalMoney, employeeId, customerId, serviceId);
+        Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit, employeeId, customerId,
+                serviceId);
         contractService.update(contractId, contract);
 
         //chuyen tiep toi jsp

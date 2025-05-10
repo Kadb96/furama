@@ -15,17 +15,33 @@ import java.util.List;
 
 public class ContractRepository implements IContractRepository {
 //    cac cau query duoc su dung
-    private final String SHOW_ALL = "SELECT contract.*, e.employee_name, c.customer_name, s.service_name FROM " +
-        "contract JOIN employee e ON contract.employee_id = e.employee_id JOIN customer c ON contract.customer_id " +
-        "= c.customer_id JOIN service s ON contract.service_id = s.service_id ORDER BY contract.contract_id;";
-    private final String SHOW_BY_PAGE = "SELECT contract.*, e.employee_name, c.customer_name, s.service_name FROM " +
-            "contract JOIN employee e ON contract.employee_id = e.employee_id JOIN customer c ON " +
-            "contract.customer_id = c.customer_id JOIN service s ON contract.service_id = s.service_id ORDER BY " +
-            "contract.contract_id LIMIT ?, 5;";
+    private final String SHOW_ALL = "SELECT contract.*, e.employee_name, c.customer_name, s.service_name, " +
+        "s.service_cost + ifnull(sum(att.attach_service_price * cd.quantity),0) contract_total_money " +
+        "FROM contract " +
+        "JOIN employee e ON contract.employee_id = e.employee_id " +
+        "JOIN customer c ON contract.customer_id = c.customer_id " +
+        "JOIN service s ON contract.service_id = s.service_id " +
+        "LEFT JOIN contract_detail cd ON contract.contract_id = cd.contract_id " +
+        "LEFT JOIN attach_service att ON cd.attach_service_id = att.attach_service_id " +
+        "GROUP BY contract.contract_id " +
+        "ORDER BY contract.contract_id;";
+    private final String SHOW_BY_PAGE = "SELECT contract.*, e.employee_name, c.customer_name, s.service_name, " +
+            "s.service_cost + ifnull(sum(att.attach_service_price * cd.quantity),0) contract_total_money " +
+            "FROM contract " +
+            "JOIN employee e ON contract.employee_id = e.employee_id " +
+            "JOIN customer c ON contract.customer_id = c.customer_id " +
+            "JOIN service s ON contract.service_id = s.service_id " +
+            "LEFT JOIN contract_detail cd ON contract.contract_id = cd.contract_id " +
+            "LEFT JOIN attach_service att ON cd.attach_service_id = att.attach_service_id " +
+            "GROUP BY contract.contract_id " +
+            "ORDER BY contract.contract_id " +
+            "LIMIT ?, 5;";
     private final String ADD = "INSERT INTO contract (contract_start_date, contract_end_date, contract_deposit, " +
-            "contract_total_money, employee_id, customer_id, service_id) values (?, ?, ?, ?, ?, ?, ?)";
-    private final String UPDATE = "UPDATE contract SET contract_start_date = ?, contract_end_date = ?, " +
-            "contract_deposit = ?, contract_total_money = ?, employee_id = ?, customer_id = ?, service_id = ? " +
+            "employee_id, customer_id, service_id) " +
+            "values (?, ?, ?, ?, ?, ?)";
+    private final String UPDATE = "UPDATE contract " +
+            "SET contract_start_date = ?, contract_end_date = ?, contract_deposit = ?, employee_id = ?, " +
+            "customer_id = ?, service_id = ? " +
             "WHERE contract_id = ?";
 
 
@@ -44,15 +60,15 @@ public class ContractRepository implements IContractRepository {
                 LocalDate contractStartDate = LocalDate.parse(contractStartDateString, formatter);
                 LocalDate contractEndDate = LocalDate.parse(contractEndDateString, formatter);
                 double contractDeposit = resultSet.getDouble("contract_deposit");
-                double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 int employeeId = resultSet.getInt("employee_id");
                 String customerId = resultSet.getString("customer_id");
                 String serviceId = resultSet.getString("service_id");
                 String employeeName = resultSet.getString("employee_name");
                 String customerName = resultSet.getString("customer_name");
                 String serviceName = resultSet.getString("service_name");
+                double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 ContractDto contract = new ContractDto(contractId, contractStartDate, contractEndDate, contractDeposit,
-                        contractTotalMoney, employeeId, customerId, serviceId, employeeName, customerName, serviceName);
+                        employeeId, customerId, serviceId, employeeName, customerName, serviceName, contractTotalMoney);
                 contractList.add(contract);
             }
         } catch (SQLException e) {
@@ -77,15 +93,15 @@ public class ContractRepository implements IContractRepository {
                 LocalDate contractStartDate = LocalDate.parse(contractStartDateString, formatter);
                 LocalDate contractEndDate = LocalDate.parse(contractEndDateString, formatter);
                 double contractDeposit = resultSet.getDouble("contract_deposit");
-                double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 int employeeId = resultSet.getInt("employee_id");
                 String customerId = resultSet.getString("customer_id");
                 String serviceId = resultSet.getString("service_id");
                 String employeeName = resultSet.getString("employee_name");
                 String customerName = resultSet.getString("customer_name");
                 String serviceName = resultSet.getString("service_name");
+                double contractTotalMoney = resultSet.getDouble("contract_total_money");
                 ContractDto contract = new ContractDto(contractId, contractStartDate, contractEndDate, contractDeposit,
-                        contractTotalMoney, employeeId, customerId, serviceId, employeeName, customerName, serviceName);
+                        employeeId, customerId, serviceId, employeeName, customerName, serviceName, contractTotalMoney);
                 contractList.add(contract);
             }
         } catch (SQLException e) {
@@ -114,10 +130,9 @@ public class ContractRepository implements IContractRepository {
             preparedStatement.setString(1, contract.getContractStartDateStringSql());
             preparedStatement.setString(2, contract.getContractEndDateStringSql());
             preparedStatement.setDouble(3, contract.getContractDeposit());
-            preparedStatement.setDouble(4, contract.getContractTotalMoney());
-            preparedStatement.setInt(5, contract.getEmployeeId());
-            preparedStatement.setString(6, contract.getCustomerId());
-            preparedStatement.setString(7, contract.getServiceId());
+            preparedStatement.setInt(4, contract.getEmployeeId());
+            preparedStatement.setString(5, contract.getCustomerId());
+            preparedStatement.setString(6, contract.getServiceId());
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }
@@ -140,11 +155,10 @@ public class ContractRepository implements IContractRepository {
             preparedStatement.setString(1, contract.getContractStartDateStringSql());
             preparedStatement.setString(2, contract.getContractEndDateStringSql());
             preparedStatement.setDouble(3, contract.getContractDeposit());
-            preparedStatement.setDouble(4, contract.getContractTotalMoney());
-            preparedStatement.setInt(5, contract.getEmployeeId());
-            preparedStatement.setString(6, contract.getCustomerId());
-            preparedStatement.setString(7, contract.getServiceId());
-            preparedStatement.setInt(8, contractId);
+            preparedStatement.setInt(4, contract.getEmployeeId());
+            preparedStatement.setString(5, contract.getCustomerId());
+            preparedStatement.setString(6, contract.getServiceId());
+            preparedStatement.setInt(7, contractId);
             if (preparedStatement.executeUpdate() == 1) {
                 return true;
             }

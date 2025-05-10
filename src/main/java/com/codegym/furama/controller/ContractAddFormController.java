@@ -81,14 +81,13 @@ public class ContractAddFormController extends HttpServlet {
         LocalDate contractStartDate = LocalDate.parse(contractStartDateString, formatter);
         LocalDate contractEndDate = LocalDate.parse(contractEndDateString, formatter);
         double contractDeposit = Double.parseDouble(req.getParameter("contractDeposit"));
-        double contractTotalMoney = Double.parseDouble(req.getParameter("contractTotalMoney"));
         int employeeId = Integer.parseInt(req.getParameter("employeeId"));
         String customerId = req.getParameter("customerId");
         String serviceId = req.getParameter("serviceId");
 
         //tao contract moi
-        Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit, contractTotalMoney,
-                employeeId, customerId, serviceId);
+        Contract contract = new Contract(contractStartDate, contractEndDate, contractDeposit, employeeId, customerId,
+                serviceId);
         contractService.add(contract);
 
         // chuyen tiep sang customer home
